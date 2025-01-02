@@ -17,7 +17,7 @@
         - running: Boolean indicating the game's running state.
       - Methods:
         - setup():
-          - Initialize game elements such as player and enemies, make sure to use Vector for position
+          - Initialize game elements such as player and enemies, make sure to use Vector for position.
         - game_loop():
           - Continuously running loop that manages game states, event handling, and rendering.
         - check_collisions():

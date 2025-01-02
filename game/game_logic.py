@@ -4,7 +4,7 @@ import configs.config
 from game.bullet import Bullet
 from game.enemy import Enemy
 from game.player import Player
-
+from pygame.math import Vector2  # Ensure that Vector2 is imported
 
 class Game:
     def __init__(self):
@@ -17,10 +17,10 @@ class Game:
         self.running = True
 
     def setup(self):
-        self.player = Player([self.screen.get_width() // 2, self.screen.get_height() - 50])
+        self.player = Player(Vector2(self.screen.get_width() // 2, self.screen.get_height() - 50))
         # Initialize enemies here based on game level
         for i in range(5):  # Example of creating 5 enemies
-            enemy = Enemy(100 * i, 50)
+            enemy = Enemy(Vector2(100 * i, 50))
             self.enemies.append(enemy)
 
     def game_loop(self):
@@ -64,7 +64,7 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     # Add bullet firing logic
-                    bullet = Bullet(self.player.rect.centerx, self.player.rect.top)
+                    bullet = Bullet(Vector2(self.player.rect.centerx, self.player.rect.top))
                     self.bullets.append(bullet)
             self.player.handle_event(event)
 

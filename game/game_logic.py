@@ -1,8 +1,10 @@
 import pygame
+
 import configs.config
-from game.player import Player
-from game.enemy import Enemy
 from game.bullet import Bullet
+from game.enemy import Enemy
+from game.player import Player
+
 
 class Game:
     def __init__(self):
@@ -15,7 +17,7 @@ class Game:
         self.running = True
 
     def setup(self):
-        self.player = Player(self.screen.get_width() // 2, self.screen.get_height() - 50)
+        self.player = Player([self.screen.get_width() // 2, self.screen.get_height() - 50])
         # Initialize enemies here based on game level
         for i in range(5):  # Example of creating 5 enemies
             enemy = Enemy(100 * i, 50)
@@ -71,4 +73,3 @@ if __name__ == "__main__":
     game.setup()
     game.game_loop()
     pygame.quit()
-```

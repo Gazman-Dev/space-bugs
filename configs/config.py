@@ -16,5 +16,3 @@ ENEMY_BULLET_SPEED = 7 # Speed of bullets fired by enemies
 
 # Game loop settings
 FPS = 60               # Frames per second for the game loop
-```
-This file defines the configuration parameters for the Space Bugs game, including the screen size, player and enemy speeds, bullet speeds, and frames per second for the game loop.

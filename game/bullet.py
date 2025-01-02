@@ -1,5 +1,5 @@
 import pygame
-from configs.config import PLAYER_SPEED, ENEMY_BULLET_SPEED
+
 
 class Bullet:
     def __init__(self, position, speed, direction):
@@ -16,4 +16,3 @@ class Bullet:
         bullet_color = (255, 0, 0)  # Red color for the bullet
         bullet_radius = 5  # Example bullet radius
         pygame.draw.circle(surface, bullet_color, self.position, bullet_radius)
-```

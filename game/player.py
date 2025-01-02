@@ -1,5 +1,7 @@
 import pygame
+
 import configs.config as config
+
 
 class Player:
     def __init__(self, start_position):
@@ -26,6 +28,7 @@ class Player:
         player_ship_image = pygame.image.load('images/player_ship.png')
         surface.blit(player_ship_image, self.position)
 
+
 class Bullet:
     def __init__(self, start_position):
         self.position = list(start_position)  # Create a copy of start position
@@ -37,5 +40,3 @@ class Bullet:
     def draw(self, surface):
         bullet_image = pygame.image.load('images/bullet.png')
         surface.blit(bullet_image, self.position)
-
-```

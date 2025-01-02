@@ -1,5 +1,8 @@
 import pygame
+
+from game.bullet import Bullet
 from configs.config import ENEMY_SPEED
+
 
 class Enemy:
     def __init__(self, position):
@@ -28,9 +31,4 @@ class Enemy:
         return False
 
 # Note: The Bullet class and its implementation should be defined elsewhere in the project.
-```
 
-Note:
-- This code assumes you have a configuration file with an `ENEMY_SPEED` variable defined.
-- The `Bullet` class is assumed to be defined elsewhere in the project, so its instantiation may need adjustments based on its actual implementation.
-- The `enemy_image` is simply a placeholder surface here and should ideally be replaced with an actual enemy sprite loaded from assets.

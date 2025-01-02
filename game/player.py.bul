@@ -1,0 +1,16 @@
+import pygame
+import configs/config.py
+
+- Purpose: Manages player controls and actions.
+- Class: Player
+  - Attributes:
+    - position: Initial coordinates of the player ship on the screen.
+    - speed: Speed at which the player moves, derived from config.PLAYER_SPEED.
+    - bullets: List for holding bullets fired by the player.
+  - Methods:
+    - move(direction):
+      - Update player's position based on the direction and speed.
+    - shoot():
+      - Create a new bullet object and add it to bullets list.
+    - draw(surface):
+      - Render the player ship on the given surface.

@@ -1,0 +1,10 @@
+import pygame
+import game/game_logic.py
+
+- Purpose: Acts as the entry point to initialize and start the Space Bugs game.
+- Methods:
+  - main():
+    - Initialize pygame and create a Game instance.
+    - Call the setup function of Game instance.
+    - While running:
+      - execute game_loop() from Game instance.

@@ -1,5 +1,7 @@
 # Space Bugs Game Configuration
 
+# Purpose: Defines configuration parameters for the Space Bugs game. 
+
 # Screen dimensions
 SCREEN_WIDTH = 800     # Width of the game screen in pixels
 SCREEN_HEIGHT = 600    # Height of the game screen in pixels

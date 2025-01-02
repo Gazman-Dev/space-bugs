@@ -1,2 +1,5 @@
-pygame==2.6.1
-numpy==1.26.0
+pygame==2.6.1 # Pygame library for handling game graphics and events
+numpy==1.26.0 # Numpy for numerical calculations (if relevant)
+random # Standard library for generating random numbers
+sys # Standard library for system-specific parameters and functions
+os # Standard library for interacting with the operating system

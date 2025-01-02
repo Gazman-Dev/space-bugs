@@ -1,8 +1,6 @@
 import pygame
-
 from game.bullet import Bullet
 from configs.config import ENEMY_SPEED
-
 
 class Enemy:
     def __init__(self, position):
@@ -31,4 +29,3 @@ class Enemy:
         return False
 
 # Note: The Bullet class and its implementation should be defined elsewhere in the project.
-

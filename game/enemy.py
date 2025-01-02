@@ -2,6 +2,7 @@ import pygame
 from game.bullet import Bullet
 from configs.config import ENEMY_SPEED
 
+
 class Enemy:
     def __init__(self, position):
         self.position = position

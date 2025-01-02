@@ -1,6 +1,7 @@
 import pygame
 from pygame.math import Vector2
 
+
 class Bullet:
     def __init__(self, position, speed, direction):
         self.position = Vector2(position)

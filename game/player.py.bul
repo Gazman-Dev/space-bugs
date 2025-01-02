@@ -1,16 +1,27 @@
-import pygame
-import configs/config.py
-
-- Purpose: Manages player controls and actions.
-- Class: Player
-  - Attributes:
-    - position: Initial coordinates of the player ship on the screen.
-    - speed: Speed at which the player moves, derived from config.PLAYER_SPEED.
-    - bullets: List for holding bullets fired by the player.
-  - Methods:
-    - move(direction):
-      - Update player's position based on the direction and speed.
-    - shoot():
-      - Create a new bullet object and add it to bullets list.
-    - draw(surface):
-      - Render the player ship on the given surface.
+- Purpose: Manages player controls and actions, including movement and shooting mechanics, and rendering of player and bullet images.
+- Imports:
+  - import pygame
+  - import configs.config as config
+- Definitions:
+  - Classes:
+    - Player:
+      - Attributes:
+        - position: Initial coordinates of the player ship on the screen.
+        - speed: Speed at which the player moves, derived from config.PLAYER_SPEED.
+        - bullets: List for holding bullets fired by the player.
+      - Methods:
+        - move(direction):
+          - Update player's position based on the direction and speed.
+        - shoot():
+          - Create a new bullet object and add it to bullets list.
+        - draw(surface):
+          - Load player ship image and render it on the given surface at the player's position.
+    - Bullet:
+      - Attributes:
+        - position: Current coordinates of the bullet on the screen.
+        - speed: Speed at which the bullet moves, derived from config.BULLET_SPEED.
+      - Methods:
+        - move():
+          - Update bullet's position by moving it up the screen at its speed.
+        - draw(surface):
+          - Load bullet image and render it on the given surface at the bullet's position.

@@ -1,10 +1,10 @@
-- Purpose: Defines configuration parameters for the Space Bugs game.
+- Purpose: Defines configuration parameters for the Space Bugs game. 
 - Definitions:
   - Attributes:
-    - SCREEN_WIDTH: Width of the game screen.
-    - SCREEN_HEIGHT: Height of the game screen.
-    - PLAYER_SPEED: Movement speed of the player ship.
+    - SCREEN_WIDTH: Width of the game screen in pixels.
+    - SCREEN_HEIGHT: Height of the game screen in pixels.
+    - PLAYER_SPEED: Movement speed of the player's ship.
     - ENEMY_SPEED: Movement speed of the enemy ships.
     - BULLET_SPEED: Speed of bullets fired by player.
     - ENEMY_BULLET_SPEED: Speed of bullets fired by enemies.
-    - FPS: Frames per second for game loop.
+    - FPS: Frames per second for the game loop.

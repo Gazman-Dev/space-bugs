@@ -2,8 +2,8 @@
 - Definitions:
   - Attributes:
     - `__pycache__/`: Ignore Python bytecode cache directories.
-    - `.pyc`: Ignore compiled Python files.
-    - `.pyo`: Ignore optimized Python files.
+    - `*.pyc`: Ignore compiled Python files.
+    - `*.pyo`: Ignore optimized Python files.
     - `.env`: Ignore environment variables file.
     - `.venv/`: Ignore virtual environment directories.
     - `*.egg-info/`: Ignore Python egg info directories.

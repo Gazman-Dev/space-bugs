@@ -1,27 +1,30 @@
-import pygame
-import configs/config.py
-import game/player.py
-import game/enemy.py
-import game/bullet.py
-
-- Purpose: Handles the main game logic and loop.
-- Class: Game
-  - Attributes:
-    - screen: The display surface for rendering the game.
-    - clock: Controls game update intervals.
-    - player: Instance of Player class.
-    - enemies: List containing instances of Enemy class.
-    - running: Boolean indicating the game's running state.
-  - Methods:
-    - setup():
-      - Initialize game elements such as player, enemies, and interface layout.
-    - game_loop():
-      - Continuously running loop that manages game states, event handling, and rendering.
-    - check_collisions():
-      - Determine if any bullets have hit targets, and handle collisions accordingly.
-    - update():
-      - Updates positions and state of all game objects.
-    - render():
-      - Clears the screen and draws all game elements like player, enemies, bullets, etc.
-    - handle_events():
-      - Processes user input events like keyboard and mouse interactions.
+- Purpose: Handles the main game logic and loop, managing updates, rendering, and player interactions.
+- Imports:
+  - import pygame
+  - import configs.config
+  - import game.player
+  - import game.enemy
+  - import game.bullet
+- Definitions:
+  - Classes:
+    - Game:
+      - Attributes:
+        - screen: The display surface for rendering the game.
+        - clock: Controls game update intervals.
+        - player: Instance of Player class.
+        - enemies: List containing instances of Enemy class.
+        - bullets: List of Bullet instances on screen.
+        - running: Boolean indicating the game's running state.
+      - Methods:
+        - setup():
+          - Initialize game elements such as player and enemies.
+        - game_loop():
+          - Continuously running loop that manages game states, event handling, and rendering.
+        - check_collisions():
+          - Determine if any bullets have hit targets, and handle collisions accordingly.
+        - update():
+          - Updates positions and state of all game objects.
+        - render():
+          - Clears the screen and draws all game elements like player, enemies, bullets, etc.
+        - handle_events():
+          - Processes user input events like keyboard and mouse interactions.

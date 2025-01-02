@@ -1,14 +1,17 @@
-import pygame
-import configs/config.py
-
-- Purpose: Represents bullet objects managed by players and enemies.
-- Class: Bullet
-  - Attributes:
-    - position: Start coordinates for the bullet.
-    - speed: Determines bullet speed, can be PLAYER_SPEED or ENEMY_BULLET_SPEED.
-    - direction: Moving direction of the bullet.
-  - Methods:
-    - move():
-      - Modify bullet's position based on speed and direction.
-    - draw(surface):
-      - Render the bullet onto the provided surface.
+- Purpose: Represents bullet objects in the game, allowing for movement and rendering.
+- Imports:
+  - import pygame
+- Definitions:
+  - Classes:
+    - Bullet:
+      - Attributes:
+        - position: Start coordinates for the bullet.
+        - speed: Determines bullet speed.
+        - direction: Moving direction of the bullet.
+      - Methods:
+        - __init__(position, speed, direction):
+          - Initializes bullet with given position, speed, and direction.
+        - move():
+          - Updates bullet's position based on its speed and direction.
+        - draw(surface):
+          - Renders the bullet as a circle onto the provided surface with a red color.

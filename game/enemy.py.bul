@@ -1,19 +1,22 @@
-import pygame
-import configs/config.py
-
-- Purpose: Defines behavior and logic for enemy characters.
-- Class: Enemy
-  - Attributes:
-    - position: Initial position of enemy on the screen.
-    - speed: Speed for enemy movement, derived from config.ENEMY_SPEED.
-    - direction: Current movement direction.
-    - bullets: List storing bullets fired by the enemy.
-  - Methods:
-    - move():
-      - Update enemy's position depending on speed and direction.
-    - shoot():
-      - Instantiate a bullet object and add to bullets list.
-    - draw(surface):
-      - Draw enemy ship on designated surface.
-    - check_collision(object):
-      - Check if enemy has collided with an object like player bullets.
+- Purpose: Defines behavior and logic for enemy characters, including movement, shooting, drawing, and collision detection.
+- Imports:
+  - import pygame
+  - from game.bullet import Bullet
+  - from configs.config import ENEMY_SPEED
+- Definitions:
+  - Classes:
+    - Enemy:
+      - Attributes:
+        - position: Initial position of enemy on the screen.
+        - speed: Speed for enemy movement, derived from config.ENEMY_SPEED.
+        - direction: Current movement direction, initialized downwards.
+        - bullets: List storing bullets fired by the enemy.
+      - Methods:
+        - move():
+          - Update enemy's position depending on speed and direction.
+        - shoot():
+          - Instantiate a bullet object and add to bullets list at a position just below the enemy.
+        - draw(surface):
+          - Draw enemy ship as a red square on the designated surface.
+        - check_collision(obj):
+          - Check if the enemy has collided with an object using rectangular collision detection.

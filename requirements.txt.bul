@@ -1,0 +1,8 @@
+- Purpose: Lists all external libraries and dependencies required to run the Space Bugs game project.
+- Definitions:
+  - Attributes:
+    - pygame==2.3.0 # Pygame library for handling game graphics and events
+    - numpy==1.23.5 # Numpy for numerical calculations (if relevant)
+    - random # Standard library for generating random numbers
+    - sys # Standard library for system-specific parameters and functions
+    - os # Standard library for interacting with the operating system

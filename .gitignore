@@ -1,0 +1,27 @@
+```
+# Python bytecode cache directories
+__pycache__/
+
+# Compiled Python files
+*.pyc
+
+# Optimized Python files
+*.pyo
+
+# Environment variables file
+.env
+
+# Virtual environment directories
+.venv/
+
+# Python egg info directories
+*.egg-info/
+
+# macOS system files
+.DS_Store
+
+# Log files
+*.log
+```
+
+This file, when placed in the root directory of a git repository, will ensure that the specified files and directories are ignored by git.

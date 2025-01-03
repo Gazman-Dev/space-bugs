@@ -18,7 +18,7 @@ class Game:
         self.running: bool = True
 
     def setup(self) -> None:
-        self.player = Player(Vector2(self.screen.get_width() // 2, self.screen.get_height() - 50))
+        self.player = Player()
         # Initialize enemies here based on game level
         for i in range(5):  # Example of creating 5 enemies
             enemy = Enemy(Vector2(100 * i, 50))
@@ -45,7 +45,7 @@ class Game:
         for enemy in self.enemies:
             enemy.update()
         for bullet in self.bullets:
-            bullet.update()
+            bullet.update(self.screen)
             if bullet.rect.bottom < 0:
                 self.bullets.remove(bullet)
 

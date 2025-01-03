@@ -1,7 +1,10 @@
 import pygame
-import configs.config as config
 from pygame.math import Vector2
-import assets_loader
+
+import configs.config as config
+from game.utils.assets_loader import AssetsLoader
+from game.bullet import Bullet
+
 
 class Player:
     def __init__(self):
@@ -9,7 +12,7 @@ class Player:
         self.speed: float = config.PLAYER_SPEED
         self.bullets: list = []
         self.direction: Vector2 = Vector2(0, 0)
-        self.player_image: pygame.Surface = assets_loader.load_player_image()
+        self.player_image: pygame.Surface = AssetsLoader.load_player_image()
         self.size: Vector2 = Vector2(config.PLAYER_SIZE[0], config.PLAYER_SIZE[1])
 
     def move(self, direction: Vector2) -> None:
@@ -38,18 +41,3 @@ class Player:
             bullet.update()
 
         self.draw(screen)
-
-class Bullet:
-    def __init__(self, position: Vector2):
-        self.position: Vector2 = position
-        self.speed: float = config.BULLET_SPEED
-        self.bullet_image: pygame.Surface = assets_loader.load_bullet_image()
-
-    def update(self) -> None:
-        self.position.y -= self.speed
-
-    def draw(self, surface: pygame.Surface) -> None:
-        surface.blit(self.bullet_image, (self.position.x, self.position.y))
-```
-
-Please note that you need to have appropriate definitions for `assets_loader.load_player_image()`, `assets_loader.load_bullet_image()`, and `config` module which should contain attributes like `SCREEN_WIDTH`, `SCREEN_HEIGHT`, `PLAYER_SPEED`, `PLAYER_SIZE`, `BULLET_SPEED`, etc.

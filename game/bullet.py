@@ -16,7 +16,7 @@ class Bullet:
     def move(self):
         self.position += self.speed * self.direction
 
-    def update(self):
+    def update(self, surface: pygame.Surface):
         self.move()
 
     def draw(self, surface: pygame.Surface):

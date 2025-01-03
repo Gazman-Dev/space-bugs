@@ -29,6 +29,6 @@ class AssetsLoader:
         """Uses load_image to load the bullet image using BULLET_IMAGE_PATH."""
         return cls.load_image(cls.BULLET_IMAGE_PATH)
 
-# Ensure other game components such as player, enemies, and bullets
-# reference the `assets_loader.py` for loading their associated images.
+# Ensure other game components such as player and enemies reference
+# the `assets_loader.py` for loading their associated images.
 # Adjust the imports in those files accordingly.

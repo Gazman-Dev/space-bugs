@@ -30,12 +30,12 @@
           - Execute collision logic to evaluate bullet interactions with target entities; adjust game state to reflect outcomes of collisions.
         - update() -> None:
           - Methodically update positions and states of game objects:
-            - Refresh player state through its internal operations.
-            - Apply updates to enemies, incorporating position changes and activities.
-            - Adjust bullet motions and states based on current trajectories.
+            - Update the player state with reference to the screen to ensure positional adjustments within screen bounds.
+            - Apply updates to enemies, passing the screen as a reference for positional accuracy.
+            - Adjust bullet motions with respect to the screen reference for correct trajectories.
         - render() -> None:
           - Engage rendering logic to visually present game elements:
             - Clear the display surface, ensuring a fresh frame.
-            - Render each game element using their draw methods to reflect the current state accurately.
+            - Provide each game element with the screen reference during their drawing processes to ensure accurate rendering positions.
         - handle_events() -> None:
           - Interpret and react to user inputs such as keyboard and mouse actions, impacting game dynamics correspondingly.

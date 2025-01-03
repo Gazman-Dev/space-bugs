@@ -1,4 +1,4 @@
-- Purpose: Represents bullet objects in the game, handling movement, collision detection, and rendering using simple shapes for display.
+- Purpose: Represents bullet objects in the game, handling movement, collision detection, and rendering using simple shapes for display. Updates the bullet's position relative to the screen during gameplay interactions.
 - Imports:
   - import pygame
   - from path.to.vector2_module import Vector2
@@ -16,11 +16,11 @@
           - Initializes the bullet with a given position, speed, direction, radius, and color, setting the necessary attributes for its representation as a circle.
         - move():
           - Computes updated bullet position by applying speed and direction to current coordinates, adjusted for time elapsed.
-        - update():
-          - Executes position update of the bullet through its move method, preparing it for subsequent game interactions.
+        - update(surface: pygame.Surface):
+          - Executes position update of the bullet through its move method, utilizing the dimensions of the provided surface to ensure the bullet stays within screen boundaries.
         - draw(surface: pygame.Surface):
           - Draws a circle representing the bullet on the given surface at its current position using the specified radius and color.
         - render(surface: pygame.Surface):
-          - Calls the draw function to render the bullet as a shape within the game loop's render phase.
+          - Updates the bullet’s position based on screen dimensions derived from the surface, then calls the draw function to render the bullet as a shape within the game loop's render phase.
         - is_off_screen(screen_size: tuple[int, int]) -> bool:
-          - Verifies if the bullet's position exceeds the boundaries of the specified screen size, indicating necessity for removal.
+          - Verifies if the bullet’s position exceeds the boundaries of the specified screen size, indicating the necessity for removal.

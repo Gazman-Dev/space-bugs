@@ -1,17 +1,23 @@
-- Purpose: Represents bullet objects in the game, allowing for movement and rendering.
+- Purpose: Represents bullet objects in the game, allowing for movement, collision detection, and rendering.
 - Imports:
   - import pygame
+  - import math
+  - import path/to/vector2_module (Ensure this is the correct path for Vector2)
 - Definitions:
   - Classes:
     - Bullet:
       - Attributes:
-        - position: Start coordinates for the bullet.
-        - speed: Determines bullet speed.
-        - direction: Moving direction of the bullet.
+        - position: Vector2 object representing the start coordinates for the bullet.
+        - speed: Scalar value determining bullet speed.
+        - direction: Vector2 object for the moving direction of the bullet.
+        - radius: The visual size of the bullet on-screen.
+        - color: The bullet's color, typically set to red.
       - Methods:
-        - __init__(position, speed, direction):
-          - Initializes bullet with given position, speed, and direction.
+        - __init__(position, speed, direction, radius=5, color=(255, 0, 0)):
+          - Initializes bullet using provided initial position, speed, and direction. Sets visual properties like radius and color using default or provided values.
         - move():
-          - Updates bullet's position based on its speed and direction.
+          - Updates bullet's position by calculating the new coordinates based on its speed, direction, and time elapsed since the last update.
         - draw(surface):
-          - Renders the bullet as a circle onto the provided surface with a red color.
+          - Renders the bullet as a circle onto the provided surface using its position, radius, and color attributes.
+        - is_off_screen(screen_size):
+          - Checks if the bullet's position is outside the boundaries of the game screen to determine if it should be removed.

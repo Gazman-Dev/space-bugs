@@ -1,27 +1,24 @@
-- Purpose: Manages player controls and actions, including movement and shooting mechanics, and rendering of player and bullet images.
+- Purpose: Manages player controls and actions, including movement and shooting mechanics, and rendering of player and bullet images. Also handles updating the game state for player and bullets.
 - Imports:
   - import pygame
   - import configs.config as config
+  - import pygame.math.Vector2
+  - import assets.images as images
+
 - Definitions:
   - Classes:
     - Player:
       - Attributes:
-        - position: Initial coordinates of the player ship on the screen.
+        - position: Initial coordinates of the player ship on the screen, using Vector2 for positions.
         - speed: Speed at which the player moves, derived from config.PLAYER_SPEED.
         - bullets: List for holding bullets fired by the player.
+        - direction: Direction of player movement as a Vector2.
       - Methods:
         - move(direction):
-          - Update player's position based on the direction and speed.
+          - Update player's position using Vector2 by adding speed scaled by direction to the current position.
         - shoot():
-          - Create a new bullet object and add it to bullets list.
+          - Create a new bullet object at the current player position and add it to the bullets list.
         - draw(surface):
-          - Load player ship image and render it on the given surface at the player's position.
-    - Bullet:
-      - Attributes:
-        - position: Current coordinates of the bullet on the screen.
-        - speed: Speed at which the bullet moves, derived from config.BULLET_SPEED.
-      - Methods:
-        - move():
-          - Update bullet's position by moving it up the screen at its speed.
-        - draw(surface):
-          - Load bullet image and render it on the given surface at the bullet's position.
+          - Render the player ship image on the given surface at the player's current position.
+        - update():
+          - Integrate movement, shooting, and other updates needed for the current game frame.

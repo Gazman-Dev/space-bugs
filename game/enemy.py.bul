@@ -1,22 +1,27 @@
-- Purpose: Defines behavior and logic for enemy characters, including movement, shooting, drawing, and collision detection.
+- Purpose: Defines behavior and logic for enemy characters, including movement, shooting, drawing, collision detection, rendering, and updating within the game loop.
 - Imports:
   - import pygame
+  - from pygame.math import Vector2
   - from game.bullet import Bullet
   - from configs.config import ENEMY_SPEED
 - Definitions:
   - Classes:
     - Enemy:
       - Attributes:
-        - position: Initial position of enemy on the screen.
+        - position: Initial position of enemy on the screen as a Vector2 for better manipulation.
         - speed: Speed for enemy movement, derived from config.ENEMY_SPEED.
-        - direction: Current movement direction, initialized downwards.
+        - direction: Current movement direction as a Vector2, initialized downwards.
         - bullets: List storing bullets fired by the enemy.
       - Methods:
         - move():
-          - Update enemy's position depending on speed and direction.
+          - Calculate new position by adding the product of speed and direction to current position; update the position.
         - shoot():
-          - Instantiate a bullet object and add to bullets list at a position just below the enemy.
+          - Create a new Bullet object at position directly below the enemy; append this bullet to the bullets list.
         - draw(surface):
-          - Draw enemy ship as a red square on the designated surface.
+          - Use pygame to render the enemy as a red square at its current position on the given surface.
         - check_collision(obj):
-          - Check if the enemy has collided with an object using rectangular collision detection.
+          - Use pygame's collision detection to evaluate if this enemy intersects with the provided object's rectangle.
+        - update():
+          - Update the enemy's state by calling move(), checking for bullet collisions, and managing off-screen bullets.
+        - render(screen):
+          - Draw the enemy and its bullets on the provided screen surface within each game loop iteration.

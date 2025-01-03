@@ -7,6 +7,7 @@ from configs.config import MAX_ENEMIES, SCREEN_WIDTH, SCREEN_HEIGHT, FPS
 from game.bullet import Bullet
 from game.enemy import Enemy
 from game.player import Player
+from game.toolbar import Toolbar  # Added import for Toolbar
 
 
 class Game:
@@ -19,11 +20,14 @@ class Game:
         self.bullets: list[Bullet] = []
         self.running: bool = True
         self.last_enemy_spawn_time: float = time.time()
+        self.toolbar: Toolbar = Toolbar()  # Initialize toolbar
 
     def setup(self) -> None:
         self.player = Player()
         # Initialize enemies here based on game level
         self.spawn_enemies()
+        # Initialize toolbar for game stats display
+        self.toolbar.setup()
 
     def spawn_enemies(self) -> None:
         current_time = time.time()
@@ -40,6 +44,7 @@ class Game:
             self.draw()
             self.clock.tick(FPS)
             self.spawn_enemies()
+            self.toolbar.update(self.player.health, self.player.score)  # Update toolbar with live stats
 
     def check_collisions(self) -> None:
         bullets_to_remove = []
@@ -50,7 +55,8 @@ class Game:
                 if bullet.rect().colliderect(enemy.rect):
                     enemies_to_remove.append(enemy)
                     bullets_to_remove.append(bullet)
-                    # Handle what happens when an enemy is hit, e.g., increase score
+                    # Increase score on hitting an enemy
+                    self.player.score += enemy.value
 
         # Remove bullets and enemies after iteration to avoid modifying the list during iteration
         for bullet in bullets_to_remove:
@@ -60,6 +66,11 @@ class Game:
         for enemy in enemies_to_remove:
             if enemy in self.enemies:
                 self.enemies.remove(enemy)
+
+        # Check player health/game over condition
+        if self.player.health <= 0:
+            self.running = False
+            print("Game Over!")  # Placeholder for game over sequence
 
     def update(self) -> None:
         self.player.update(self.screen)
@@ -77,6 +88,7 @@ class Game:
             enemy.draw(self.screen)
         for bullet in self.bullets:
             bullet.draw(self.screen)
+        self.toolbar.draw(self.screen)  # Draw toolbar with current game stats
         pygame.display.flip()
 
     def handle_events(self) -> None:
@@ -87,6 +99,10 @@ class Game:
                 if event.key == pygame.K_SPACE:
                     bullet = Bullet(Vector2(self.player.rect.centerx, self.player.rect.top))
                     self.bullets.append(bullet)
+                # Example additional key action
+                elif event.key == pygame.K_r:
+                    self.__init__()  # Restart game by reinitializing
+                    self.setup()
 
 
 if __name__ == "__main__":

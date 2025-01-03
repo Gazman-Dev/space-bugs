@@ -18,3 +18,10 @@ ENEMY_BULLET_SPEED: float = 7.0 # Speed of bullets fired by enemies
 
 # Game loop settings
 FPS: int = 60               # Frames per second for the game loop
+
+# Game configuration attributes
+WIDTH: int = 600
+HEIGHT: int = 400
+BLOCK_SIZE: int = 10
+SNAKE_SPEED: int = 15
+FONT_SIZE: int = 24

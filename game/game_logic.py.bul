@@ -1,4 +1,4 @@
-- Purpose: Executes the main game loop, ensuring efficient handling of game updates, rendering processes, player interactions, and random enemy behavior for smooth gameplay, with type hints included for clarity.
+- Purpose: Executes the main game loop, ensuring efficient handling of game updates, rendering processes, player interactions, and random enemy behavior for smooth gameplay. Includes updates for collision-triggered popup handling.
 
 - Imports:
   - import pygame
@@ -24,22 +24,22 @@
 
       - Methods:
         - setup() -> None:
-          - Initialize game elements like the player with a starting position using Vector2 for precise coordinates, prepare game settings, and initialize required lists for enemies and bullets.
+          - Initialize game elements, including the player with a starting position using Vector2 for precise coordinates. Prepare game settings and initialize required lists for enemies and bullets.
         
         - spawn_enemies() -> None:
-          - Verify if sufficient time has elapsed since the last enemy spawn and the currently active count of enemies is less than the predefined maximum. Create and append new `Enemy` instances to the enemies list. Reset the enemy spawn timer.
+          - Verify if sufficient time has elapsed since the last enemy spawn and the currently active count of enemies is less than the predefined maximum. Create and append new `Enemy` instances to the enemies list and reset the enemy spawn timer.
         
         - game_loop() -> None:
-          - Run continuously while the running flag is true. Capture user inputs, update all game component states, detect and process collisions, render updated graphics to the screen, and keep the game running at a consistent frame rate, invoking enemy spawn method as dictated by game timing.
+          - Continues running while the running flag is true. Capture user inputs, update all game component states, detect and process collisions, render updated graphics to the screen, and maintain a consistent frame rate. Manage enemy spawning as dictated by game timing.
         
         - check_collisions() -> None:
-          - Check for interactions between bullets and enemy or player objects, updating the game state based on detection results and executing relevant events (e.g., removing an enemy or reducing player health) when collisions occur.
+          - Check for interactions between bullets and enemy or player objects. Update game state based on detection results and execute relevant events, such as removing an enemy or reducing player health. If an enemy collides with the player, trigger a game over popup, halt the game loop, and display options like restarting or exiting the game.
         
         - update() -> None:
-          - Sequentially update each game element: player movement, enemy movements according to their logic, and bullet trajectories; ensure all remain within screen bounds and handle interactions accordingly.
+          - Sequentially update each game element: player movement, enemy movements according to their logic, and bullet trajectories. Ensure all elements remain within screen bounds and handle interactions accordingly.
         
         - draw() -> None:
-          - Clear the current screen, and invoke the draw method for all game objects (player, enemies, bullets), passing the screen as the draw target to ensure accurate rendering.
+          - Clear the current screen and invoke the draw method for all game objects (player, enemies, bullets), passing the screen as the draw target to ensure accurate rendering.
         
         - handle_events() -> None:
-          - Poll events using pygame’s event system. Detect key presses such as the space bar, instantiate a bullet at the player's position with its direction set for upward movement using Vector2, append to the bullets list, and manage other user inputs to affect game dynamics.
+          - Poll events using pygame’s event system. Detect key presses, such as the space bar, to instantiate a bullet at the player's position with its direction set for upward movement using Vector2. Append to the bullets list and manage other user inputs to affect game dynamics. Handle popup interactions to restart or exit the game.

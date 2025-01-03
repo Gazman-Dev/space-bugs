@@ -21,7 +21,7 @@ class Game:
         self.last_enemy_spawn_time: float = time.time()
 
     def setup(self) -> None:
-        self.player = Player(Vector2(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 30))
+        self.player = Player()
         # Initialize enemies here based on game level
         self.spawn_enemies()
 

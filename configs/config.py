@@ -4,6 +4,8 @@
 SCREEN_WIDTH: int = 800     # Width of the game screen in pixels
 SCREEN_HEIGHT: int = 600    # Height of the game screen in pixels
 
+MAX_ENEMIES: int = 8
+
 # Player settings
 PLAYER_SPEED: float = 5.0   # Movement speed of the player's ship
 PLAYER_SIZE: tuple[int, int] = (200, 200)  # Dimensions of the player's ship defined by width and height in pixels

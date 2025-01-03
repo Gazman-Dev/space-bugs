@@ -1,44 +1,30 @@
-import pygame
-from pygame.math import Vector2
-
-import configs.config as config
-from game.bullet import Bullet
-from game.utils.assets_loader import AssetsLoader
-
-
-class Player:
-    def __init__(self, start_position: Vector2):
-        self.position: Vector2 = Vector2(start_position)
-        self.speed: float = config.PLAYER_SPEED
-        self.bullets: list = []
-        self.direction: Vector2 = Vector2(0, 0)
-        self.player_image: pygame.Surface = AssetsLoader.load_player_image()
-        self.size: Vector2 = Vector2(self.player_image.get_width(), self.player_image.get_height())
-
-    def move(self, direction: Vector2) -> None:
-        self.direction = direction
-
-        # Update position using Vector2
-        self.position += self.direction * self.speed
-
-        # Ensure player stays within screen bounds using config values
-        screen_size = [config.SCREEN_WIDTH, config.SCREEN_HEIGHT]
-        self.position.x = max(0, min(self.position.x, screen_size[0] - self.size.x))
-        self.position.y = max(0, min(self.position.y, screen_size[1] - self.size.y))
-
-    def shoot(self) -> None:
-        new_bullet = Bullet(self.position)
-        self.bullets.append(new_bullet)
-
-    def draw(self, surface: pygame.Surface) -> None:
-        # Render player ship image on surface
-        surface.blit(self.player_image, self.position)
-
-    def update(self, screen: pygame.Surface) -> None:
-        self.move(self.direction)
-        for bullet in self.bullets:
-            bullet.move()
-
-    def render(self, screen: pygame.Surface) -> None:
-        self.draw(screen)
-        # Additional rendering logic can be added here, e.g., bullets, enemies
+- Purpose: Manage player character behavior, including movement, shooting, and rendering in a pygame shoot-'em-up game. 
+- Imports:
+  - import pygame
+  - from pygame.math import Vector2
+  - import configs.config as config
+  - from game.bullet import Bullet
+  - from game.utils.assets_loader import AssetsLoader
+- Definitions:
+  - Classes:
+    - Player:
+      - Attributes:
+        - position: tracks the player's position using a Vector2.
+        - speed: the player's movement speed, sourced from the configuration.
+        - bullets: maintains a list of the player's active bullets.
+        - direction: direction vector for player's movement.
+        - player_image: stores the player's current image to be rendered.
+        - size: indicates the dimensions of the player image.
+      - Methods:
+        - __init__(start_position: Vector2):
+          - Initializes player's position, speed, and loads the player's image. Determines the player's image size proportionate to the screen size by utilizing a scaling ratio from the configuration.
+        - move(direction: Vector2) -> None:
+          - Updates the player's direction and computes new position. Ensures the player remains within screen bounds.
+        - shoot() -> None:
+          - Appends a new bullet to the player's bullets list, starting at the player's current position.
+        - draw(surface: pygame.Surface) -> None:
+          - Renders and positions the player's image onto the provided surface.
+        - update(screen: pygame.Surface) -> None:
+          - Calls move to adjust the player's position and updates all bullets' movements.
+        - render(screen: pygame.Surface) -> None:
+          - Draws the player and manages additional rendering tasks.

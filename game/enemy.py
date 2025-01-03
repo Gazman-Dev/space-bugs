@@ -1,52 +1,52 @@
 import pygame
 from pygame.math import Vector2
-
-from configs.config import ENEMY_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
+from typing import List
 from game.bullet import Bullet
-from game.utils.assets_loader import AssetsLoader
-
+from configs.config import ENEMY_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
+from utils.assets_loader import load_enemy_asset
 
 class Enemy:
     def __init__(self, position: Vector2) -> None:
         self.position: Vector2 = position
         self.speed: float = ENEMY_SPEED
-        self.direction: Vector2 = Vector2(0, 1)  # Assuming the enemy moves downwards initially
-        self.bullets: list[Bullet] = []
-        self.image: pygame.Surface = AssetsLoader.load_enemy_image()
-        self.size: Vector2 = Vector2(
-            self.image.get_width() * (SCREEN_WIDTH / 1000),
-            self.image.get_height() * (SCREEN_HEIGHT / 1000)
-        )
-        self.image = pygame.transform.scale(self.image, (int(self.size.x), int(self.size.y)))
+        self.direction: Vector2 = Vector2(0, 1)  # Moving downward by default
+        self.bullets: List[Bullet] = []
+
+        # Load and scale the image asset
+        asset = load_enemy_asset()
+        self.size: Vector2 = Vector2(asset.get_width(), asset.get_height())
+        scale_factor = Vector2(SCREEN_WIDTH, SCREEN_HEIGHT) / self.size 
+        self.image: pygame.Surface = pygame.transform.scale(asset, (int(self.size.x * scale_factor.x), int(self.size.y * scale_factor.y)))
 
     def move(self) -> None:
         self.position += self.direction * self.speed
+        self.position.y = min(self.position.y, SCREEN_HEIGHT)  # Keeps the enemy inside screen bounds vertically
 
     def shoot(self) -> None:
-        bullet_position = self.position + Vector2(0, 1)  # Example: starting just below the enemy
-        bullet = Bullet(bullet_position)  # Assuming a Bullet class is defined elsewhere
+        bullet_position = self.position + Vector2(0, self.size.y)
+        bullet = Bullet(bullet_position)
         self.bullets.append(bullet)
 
     def draw(self, surface: pygame.Surface) -> None:
-        surface.blit(self.image, self.position)  # Use the loaded image for rendering
+        surface.blit(self.image, self.position)
 
     def check_collision(self, obj: pygame.Rect) -> bool:
-        enemy_rect = pygame.Rect(self.position.x, self.position.y, self.size.x, self.size.y)  # Use image dimensions
-        if enemy_rect.colliderect(obj):
-            return True
-        return False
+        enemy_rect = self.image.get_rect(topleft=self.position)
+        return enemy_rect.colliderect(obj)
 
-    def update(self) -> None:
+    def update(self, screen: pygame.Surface) -> None:
         self.move()
-        # Check for bullet collisions or other updates needed for each enemy
-        self.position.x = max(0, min(self.position.x, SCREEN_WIDTH - self.size.x))
-        self.position.y = max(0, min(self.position.y, SCREEN_HEIGHT - self.size.y))
-        # Filter out bullets that are off screen
-        self.bullets = [bullet for bullet in self.bullets if 0 <= bullet.position.y < SCREEN_HEIGHT]
+
+        # Remove bullets that have gone beyond the screen boundaries
+        self.bullets = [bullet for bullet in self.bullets if bullet.position.y < SCREEN_HEIGHT]
+
+        for bullet in self.bullets:
+            bullet.update()
+
+        self.render(screen)
 
     def render(self, screen: pygame.Surface) -> None:
         self.draw(screen)
         for bullet in self.bullets:
-            bullet.draw(screen)  # Assuming Bullet class has a draw method
-
-# Note: The Bullet class and its implementation should be defined elsewhere in the project.
+            bullet.draw(screen)
+```

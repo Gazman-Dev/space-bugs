@@ -12,3 +12,4 @@
     - BULLET_SPEED: `float` - Speed of bullets fired by player.
     - ENEMY_BULLET_SPEED: `float` - Speed of bullets fired by enemies.
     - FPS: `int` - Frames per second for the game loop.
+    - PLAYER_SIZE: `tuple[int, int]` - Dimensions of the player's ship defined by width and height in pixels.

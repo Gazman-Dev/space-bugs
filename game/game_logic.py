@@ -24,7 +24,7 @@ class Game:
         self.player_health: int = 5  # Initialize player health
 
     def setup(self) -> None:
-        self.player = Player(Vector2(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 60))  # Initialize player at starting coordinates
+        self.player = Player()
         self.spawn_enemies()
 
     def spawn_enemies(self) -> None:
@@ -66,7 +66,7 @@ class Game:
                 self.enemies.remove(enemy)
 
         # Check player health/game over condition
-        if self.player.health <= 0:
+        if self.player_health <= 0:
             self.running = False
             print("Game Over!")  # Placeholder for game over sequence
 

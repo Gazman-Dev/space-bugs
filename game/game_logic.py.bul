@@ -27,7 +27,7 @@
 
       - Methods:
         - setup() -> None:
-          - Initialize core game elements, such as the player with Vector2 starting coordinates. Set up screen settings, enemies, bullets, and toolbar initialization for displaying game stats.
+          - Initialize core game elements, such as the player. Set up screen settings, enemies, bullets, and toolbar initialization for displaying game stats.
 
         - spawn_enemies() -> None:
           - Check timing and current enemy count. Spawn new Enemy instances when permissible, reset the last spawn time, and update the enemy list.

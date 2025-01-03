@@ -1,4 +1,4 @@
-- Purpose: Manages player controls and actions, including movement, shooting mechanics, and rendering. Updates game components like player and bullets with consideration of screen size using the configuration settings. Facilitates interaction for seamless gameplay control.
+- Purpose: Manages player controls and actions, including movement mechanics and rendering. Updates player component with consideration of screen size using the configuration settings, facilitating seamless gameplay control.
 
 - Imports:
   - import pygame
@@ -12,7 +12,6 @@
       - Attributes:
         - position: pygame.math.Vector2 - Sets initial coordinates of the player ship on screen; utilizes Vector2 for precise position tracking.
         - speed: float - Defined by config.PLAYER_SPEED; influences player's movement velocity.
-        - bullets: list - Manages collection of bullet objects fired by the player for rendering.
         - direction: pygame.math.Vector2 - Vector2 representation for player movement direction.
         - player_image: pygame.Surface - Visual asset for the player ship, obtained via assets_loader.
         - size: pygame.math.Vector2 - Represents player ship size proportionally, adapting to screen dimensions from config.
@@ -20,11 +19,9 @@
       - Methods:
         - move(self, direction: pygame.math.Vector2) -> None:
           - Updates player position by applying speed to direction vector for seamless movement with Vector2 math. Adjusts according to screen size for proportional navigation.
-        - shoot(self) -> None:
-          - Instantiates a new bullet object at the player's current locus and adds it to bullets list for further processing and rendering.
         - draw(self, screen: pygame.Surface) -> None:
-          - Renders player ship image and bullets on the provided screen surface; ensures central alignment with current position and scales image to appropriate size. Positioning relates to the screen ensuring all game elements are proportionately displayed.
+          - Renders player ship image on the provided screen surface; ensures central alignment with current position and scales image to appropriate size. Positioning relates to the screen ensuring all game elements are proportionately displayed.
         - update(self, screen: pygame.Surface) -> None:
-          - Incorporates movement, shooting, and cycle adjustments for real-time gameplay. Adjusts position using input direction, manages bullets, and ensures position updates based on the screen's size.
+          - Incorporates movement and cycle adjustments for real-time gameplay. Adjusts position using input direction and ensures position updates based on the screen's size.
         - update_rect(self) -> None:
           - Refreshes the player's rect attribute, aligning it with the current position and size, enabling precise collision detection and screen boundary handling.

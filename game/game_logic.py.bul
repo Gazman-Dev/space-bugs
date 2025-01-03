@@ -30,4 +30,4 @@
         - draw() -> None:
           - Clear the display, then call the draw method for all game elements (player, enemies, bullets), providing the screen as the reference surface for each to render themselves appropriately.
         - handle_events() -> None:
-          - Interpret and react to user-generated inputs to influence game dynamics, managing interactions from keyboards and other input mediums.
+          - Capture events from pygame's event queue. If the space key is pressed, create a new bullet instance with position set to the player’s current position, direction set using Vector2 for upward movement, and add it to the bullets list. Handle other user-generated inputs to influence game dynamics, managing interactions from keyboards and other input mediums.

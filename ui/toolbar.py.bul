@@ -1,0 +1,18 @@
+import pygame
+import configs/config.py
+
+- Purpose: Defines the Toolbar component to display real-time player score and health status.
+- Class: Toolbar
+  - Attributes:
+    - screen: Pygame display surface.
+    - font: Pygame font for rendering text.
+    - score_position: Position on screen to render score.
+    - health_position: Position on screen to render health.
+  - Methods:
+    - __init__(screen, font):
+      - Initializes Toolbar with screen and font.
+      - Sets default positions for score and health display.
+    - update(score, health):
+      - Updates the display values for score and health.
+    - draw():
+      - Renders text for score and health on the screen.

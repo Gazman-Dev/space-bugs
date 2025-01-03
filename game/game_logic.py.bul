@@ -1,4 +1,4 @@
-- Purpose: Executes the main game loop, ensuring efficient handling of game updates, rendering processes, player interactions, and random enemy behavior for smooth gameplay. Includes updates for collision-triggered popup handling.
+- Purpose: Implements the main game loop, orchestrating efficient game updates, rendering, player interactions, and enemy behavior. Integrates toolbar updates and manages player's health and scoring through collision detection and game state changes.
 
 - Imports:
   - import pygame
@@ -9,37 +9,39 @@
   - from pygame.math import Vector2
   - import random
   - import time
+  - from game.toolbar import Toolbar
 
 - Definitions:
   - Classes:
     - Game:
       - Attributes:
-        - screen: pygame.Surface - The display surface for rendering the game's visual elements.
-        - clock: pygame.time.Clock - Manages time-related functions to ensure consistent update intervals.
-        - player: Player - Instance of the Player class, representing the player's ship.
-        - enemies: list[Enemy] - Collection of Enemy instances actively present in the game.
-        - bullets: list[Bullet] - Collection of active Bullet instances on the screen.
-        - running: bool - Boolean flag indicating whether the game loop is active.
-        - last_enemy_spawn_time: float - Timestamp of when the last enemy was spawned to manage delay.
+        - screen: pygame.Surface - Display surface for rendering the game visuals.
+        - clock: pygame.time.Clock - Maintains consistent timing for frames.
+        - player: Player - Represents the player's ship in the game.
+        - enemies: list[Enemy] - Current live enemies in the game.
+        - bullets: list[Bullet] - Bullets currently active on the screen.
+        - running: bool - Indicates if the game loop is currently active.
+        - last_enemy_spawn_time: float - Time reference for the last enemy spawn event.
+        - toolbar: Toolbar - Interface component for displaying player health and score.
 
       - Methods:
         - setup() -> None:
-          - Initialize game elements, including the player with a starting position using Vector2 for precise coordinates. Prepare game settings and initialize required lists for enemies and bullets.
-        
+          - Initialize core game elements, such as the player with Vector2 starting coordinates. Set up screen settings, enemies, bullets, and toolbar initialization for displaying game stats.
+
         - spawn_enemies() -> None:
-          - Verify if sufficient time has elapsed since the last enemy spawn and the currently active count of enemies is less than the predefined maximum. Create and append new `Enemy` instances to the enemies list and reset the enemy spawn timer.
-        
+          - Check timing and current enemy count. Spawn new Enemy instances when permissible, reset the last spawn time, and update the enemy list.
+
         - game_loop() -> None:
-          - Continues running while the running flag is true. Capture user inputs, update all game component states, detect and process collisions, render updated graphics to the screen, and maintain a consistent frame rate. Manage enemy spawning as dictated by game timing.
-        
+          - Execute while running is true. Process user input, update game state, detect/handle collisions, and manage rendering. Implement enemy spawning logic and handle toolbar updates to reflect live game status.
+
         - check_collisions() -> None:
-          - Check for interactions between bullets and enemy or player objects. Update game state based on detection results and execute relevant events, such as removing an enemy or reducing player health. If an enemy collides with the player, trigger a game over popup, halt the game loop, and display options like restarting or exiting the game.
-        
+          - Detect and handle interactions between bullets and either enemies or the player. If a collision occurs, update the game state, such as removing enemies, and decrease player health or increase score. Trigger a game over sequence upon critical player health loss.
+
         - update() -> None:
-          - Sequentially update each game element: player movement, enemy movements according to their logic, and bullet trajectories. Ensure all elements remain within screen bounds and handle interactions accordingly.
-        
+          - Conduct updates for player movement, enemy movement, and bullet paths, along with ensuring on-screen validity. Adjust the toolbar with current health and score metrics.
+
         - draw() -> None:
-          - Clear the current screen and invoke the draw method for all game objects (player, enemies, bullets), passing the screen as the draw target to ensure accurate rendering.
-        
+          - Erase current visuals, then draw all game components, including players, enemies, bullets, and toolbar. Render them accurately on the screen.
+
         - handle_events() -> None:
-          - Poll events using pygame’s event system. Detect key presses, such as the space bar, to instantiate a bullet at the player's position with its direction set for upward movement using Vector2. Append to the bullets list and manage other user inputs to affect game dynamics. Handle popup interactions to restart or exit the game.
+          - Monitor and handle events using pygame’s system. Key detection for actions like firing bullets from the player's location, starting upward Vector2 motion. Accommodate player inputs impacting game interactions and manage popups for restarting or exiting the game scene.

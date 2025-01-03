@@ -2,6 +2,7 @@ import pygame
 from pygame.math import Vector2
 from game.bullet import Bullet
 from configs.config import ENEMY_SPEED
+from utils.assets_loader import load_enemy_asset
 
 class Enemy:
     def __init__(self, position: Vector2):
@@ -9,6 +10,7 @@ class Enemy:
         self.speed: float = ENEMY_SPEED
         self.direction: Vector2 = Vector2(0, 1)  # Assuming the enemy moves downwards initially
         self.bullets: list[Bullet] = []
+        self.image: pygame.Surface = load_enemy_asset()  # Load enemy image asset for visual representation
 
     def move(self) -> None:
         self.position += self.direction * self.speed
@@ -19,12 +21,10 @@ class Enemy:
         self.bullets.append(bullet)
 
     def draw(self, surface: pygame.Surface) -> None:
-        enemy_image = pygame.Surface((50, 50))  # Placeholder for enemy image, 50x50 for example
-        enemy_image.fill((255, 0, 0))  # Fill with red for visibility
-        surface.blit(enemy_image, self.position)
+        surface.blit(self.image, self.position)  # Use the loaded image for rendering
 
     def check_collision(self, obj: pygame.Rect) -> bool:
-        enemy_rect = pygame.Rect(self.position.x, self.position.y, 50, 50)  # Assuming the enemy is 50x50
+        enemy_rect = pygame.Rect(self.position.x, self.position.y, self.image.get_width(), self.image.get_height())  # Use image dimensions
         if enemy_rect.colliderect(obj):
             return True
         return False

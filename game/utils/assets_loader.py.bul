@@ -1,0 +1,18 @@
+import pygame
+
+- Purpose: Centralizes and manages loading of image assets for player, enemy, and bullet objects.
+- Definitions:
+  - Attributes:
+    - PLAYER_IMAGE_PATH: File path for player image asset.
+    - ENEMY_IMAGE_PATH: File path for enemy image asset.
+    - BULLET_IMAGE_PATH: File path for bullet image asset.
+  - Methods:
+    - load_image(image_path: str) -> pygame.Surface:
+      - Loads an image file and returns it as a pygame Surface object.
+    - load_player_image() -> pygame.Surface:
+      - Uses load_image to load the player image using PLAYER_IMAGE_PATH.
+    - load_enemy_image() -> pygame.Surface:
+      - Uses load_image to load the enemy image using ENEMY_IMAGE_PATH.
+    - load_bullet_image() -> pygame.Surface:
+      - Uses load_image to load the bullet image using BULLET_IMAGE_PATH.
+Ensure other game components such as player, enemies, and bullets reference the `assets_loader.py` for loading their associated images. Adjust the imports in those files accordingly.

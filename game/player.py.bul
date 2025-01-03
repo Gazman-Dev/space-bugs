@@ -1,9 +1,9 @@
-- Purpose: Manages player controls and actions, including movement and shooting mechanics, and rendering of player and bullet images. Also handles updating the game state for player and bullets.
+- Purpose: Manages player controls and actions, including movement and shooting mechanics, and rendering of player and bullet images. It utilizes assets_loader.py to load player-related image assets and handles updating the game state for player and bullets.
 - Imports:
   - import pygame
   - import configs.config as config
   - import pygame.math.Vector2
-  - import assets.images as images
+  - import assets_loader as assets_loader
 
 - Definitions:
   - Classes:
@@ -13,12 +13,13 @@
         - speed: float - Speed at which the player moves, derived from config.PLAYER_SPEED.
         - bullets: list - Holds bullets fired by the player.
         - direction: pygame.math.Vector2 - Direction of player movement as a Vector2.
+        - player_image: pygame.Surface - Image of the player ship loaded from assets_loader.
       - Methods:
         - move(self, direction: pygame.math.Vector2) -> None:
-          - Update the player's position using Vector2 by adding speed scaled by direction to the current position.
+          - Update the player's position by adding speed, scaled by the direction vector, to the current position using Vector2.
         - shoot(self) -> None:
-          - Create a new bullet object at the player's current position and add it to the bullets list.
+          - Instantiate a new bullet object at the player's current position and append it to the bullets list.
         - draw(self, surface: pygame.Surface) -> None:
-          - Render the player ship image on the given surface at the player's current position.
+          - Render the player ship image, loaded from assets_loader, on the specified surface, centered at the player's current position.
         - update(self) -> None:
-          - Integrate movement, shooting, and other updates needed for the current game frame.
+          - Execute movement, shooting, and any necessary updates for each game cycle. Adjust player position based on direction, manage bullet list, and position any additional components as needed.

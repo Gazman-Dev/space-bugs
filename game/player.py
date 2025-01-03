@@ -40,7 +40,7 @@ class Player:
             self.shoot()
 
         for bullet in self.bullets:
-            bullet.update()
+            bullet.update(screen)
 
         self.draw(screen)
 

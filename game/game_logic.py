@@ -35,7 +35,7 @@ class Game:
     def check_collisions(self) -> None:
         for bullet in self.bullets:
             for enemy in self.enemies:
-                if bullet.rect.colliderect(enemy.rect):
+                if bullet.rect().colliderect(enemy.rect):
                     self.enemies.remove(enemy)
                     self.bullets.remove(bullet)
                     # Handle what happens when an enemy is hit, e.g., increase score
@@ -46,7 +46,7 @@ class Game:
             enemy.update()
         for bullet in self.bullets:
             bullet.update(self.screen)
-            if bullet.rect.bottom < 0:
+            if bullet.rect().bottom < 0:
                 self.bullets.remove(bullet)
 
     def render(self) -> None:

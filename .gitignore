@@ -21,3 +21,21 @@ __pycache__/
 
 # Log files
 *.log
+
+# IDE configuration directories
+.idea/
+
+# Swap files created by text editors
+*.swp
+
+# Test coverage reports
+coverage/
+
+# Distribution directories for packaging
+dist/
+
+# Build output directories
+build/
+
+# Spec files, often created by packaging tools like PyInstaller
+*.spec

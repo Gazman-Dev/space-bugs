@@ -1,42 +1,41 @@
-- Purpose: Executes the main game loop, ensuring efficient handling of game updates, rendering processes, and player interactions for smooth gameplay.
+- Purpose: Executes the main game loop, ensuring efficient handling of game updates, rendering processes, and player interactions for smooth gameplay, with type hints included for clarity.
 - Imports:
   - import pygame
   - import configs.config
   - import game.player
   - import game.enemy
   - import game.bullet
+  - import pygame.math.Vector2
 - Definitions:
   - Classes:
     - Game:
       - Attributes:
-        - screen: The display surface for rendering the game's visual elements.
-        - clock: Manages time-related functions to ensure consistent update intervals.
-        - player: Instance of the Player class, representing the player's ship.
-        - enemies: Collection of Enemy instances actively present in the game.
-        - bullets: Collection of active Bullet instances on the screen.
-        - running: Boolean flag indicating whether the game loop is active.
+        - screen: pygame.Surface - The display surface for rendering the game's visual elements.
+        - clock: pygame.time.Clock - Manages time-related functions to ensure consistent update intervals.
+        - player: game.player.Player - Instance of the Player class, representing the player's ship.
+        - enemies: list[game.enemy.Enemy] - Collection of Enemy instances actively present in the game.
+        - bullets: list[game.bullet.Bullet] - Collection of active Bullet instances on the screen.
+        - running: bool - Boolean flag indicating whether the game loop is active.
       - Methods:
-        - setup():
+        - setup() -> None:
           - Initialize game elements like player and enemies with starting positions leveraging Vector2 for precise coordinate handling.
-        - game_loop():
-          - Runs while the game is active, ensuring real-time processing:
+        - game_loop() -> None:
+          - Runs while the game is active, ensuring real-time processing: 
             - Initiate handle_events() for capturing and processing user inputs.
             - Utilize update() to manage and refresh state variables of player, enemies, and bullets, ensuring dynamic interactivity.
             - Deploy check_collisions() to assess collisions with accuracy, updating respective game element states upon interaction.
             - Execute render() to redraw all elements on the screen with current states, presenting a seamless visual experience.
             - Implement clock control to achieve steady frame rate, enhancing smoothness.
-        - check_collisions():
+        - check_collisions() -> None:
           - Execute collision logic to evaluate bullet interactions with target entities; adjust game state to reflect outcomes of collisions.
-        - update():
+        - update() -> None:
           - Methodically update positions and states of game objects:
             - Refresh player state through its internal operations.
             - Apply updates to enemies, incorporating position changes and activities.
             - Adjust bullet motions and states based on current trajectories.
-        - render():
+        - render() -> None:
           - Engage rendering logic to visually present game elements:
             - Clear the display surface, ensuring a fresh frame.
             - Render each game element using their draw methods to reflect the current state accurately.
-        - handle_events():
+        - handle_events() -> None:
           - Interpret and react to user inputs such as keyboard and mouse actions, impacting game dynamics correspondingly.
-
-By refining the update and render methods, responsibility for changes and displays is delineated, enabling maintainable and comprehensible game code aimed to optimize gameplay experience.

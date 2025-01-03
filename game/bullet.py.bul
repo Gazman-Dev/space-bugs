@@ -2,26 +2,26 @@
 - Imports:
   - import pygame
   - import math
-  - import path/to/vector2_module (Ensure this is the correct path for Vector2)
+  - from path.to.vector2_module import Vector2
 - Definitions:
   - Classes:
     - Bullet:
       - Attributes:
-        - position: Vector2 object representing the start coordinates for the bullet.
-        - speed: Scalar value determining bullet speed.
-        - direction: Vector2 object for the moving direction of the bullet.
-        - radius: The visual size of the bullet on-screen.
-        - color: The bullet's color, typically set to red.
+        - position: Vector2 - starting coordinates for the bullet.
+        - speed: float - bullet speed value.
+        - direction: Vector2 - direction vector for bullet movement.
+        - radius: int - bullet's visual size on the screen.
+        - color: tuple[int, int, int] - RGB color value of the bullet.
       - Methods:
-        - __init__(position, speed, direction, radius=5, color=(255, 0, 0)):
-          - Initializes bullet using provided initial position, speed, and direction. Sets visual properties like radius and color using default or provided values.
+        - __init__(position: Vector2, speed: float, direction: Vector2, radius: int = 5, color: tuple[int, int, int] = (255, 0, 0)):
+          - Initializes the bullet with a given position, speed, direction, radius, and color, setting up for in-game interactions.
         - move():
-          - Updates bullet's position by calculating the new coordinates based on its speed, direction, and time elapsed since the last update.
+          - Computes updated bullet position by applying speed and direction to current coordinates, adjusted for time elapsed.
         - update():
-          - Calls the move method to update the bullet's position in-game, preparing it for the next game loop cycle.
-        - draw(surface):
-          - Renders the bullet as a circle onto the provided surface using its position, radius, and color attributes.
-        - render(surface):
-          - Calls the draw method to visually present the bullet on the screen during the rendering phase of the game loop.
-        - is_off_screen(screen_size):
-          - Checks if the bullet's position is outside the boundaries of the game screen to determine if it should be removed.
+          - Executes position update of the bullet through its move method, making it ready for subsequent game interactions.
+        - draw(surface: pygame.Surface):
+          - Visually represents the bullet on a given surface utilizing its position, radius, and color characteristics.
+        - render(surface: pygame.Surface):
+          - Activates the draw function to display the bullet within the game loop’s rendering phase.
+        - is_off_screen(screen_size: tuple[int, int]) -> bool:
+          - Verifies if the bullet's position exceeds the boundaries of the specified screen size, signaling removal necessity.

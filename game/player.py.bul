@@ -9,16 +9,16 @@
   - Classes:
     - Player:
       - Attributes:
-        - position: Initial coordinates of the player ship on the screen, using Vector2 for positions.
-        - speed: Speed at which the player moves, derived from config.PLAYER_SPEED.
-        - bullets: List for holding bullets fired by the player.
-        - direction: Direction of player movement as a Vector2.
+        - position: pygame.math.Vector2 - Initial coordinates of the player ship on the screen, using Vector2 for positions.
+        - speed: float - Speed at which the player moves, derived from config.PLAYER_SPEED.
+        - bullets: list - Holds bullets fired by the player.
+        - direction: pygame.math.Vector2 - Direction of player movement as a Vector2.
       - Methods:
-        - move(direction):
-          - Update player's position using Vector2 by adding speed scaled by direction to the current position.
-        - shoot():
-          - Create a new bullet object at the current player position and add it to the bullets list.
-        - draw(surface):
+        - move(self, direction: pygame.math.Vector2) -> None:
+          - Update the player's position using Vector2 by adding speed scaled by direction to the current position.
+        - shoot(self) -> None:
+          - Create a new bullet object at the player's current position and add it to the bullets list.
+        - draw(self, surface: pygame.Surface) -> None:
           - Render the player ship image on the given surface at the player's current position.
-        - update():
+        - update(self) -> None:
           - Integrate movement, shooting, and other updates needed for the current game frame.

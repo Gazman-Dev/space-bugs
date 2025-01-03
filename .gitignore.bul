@@ -1,4 +1,5 @@
 - Purpose: Specifies files and directories to ignore in the git repository for a Python project.
+
 - Definitions:
   - Attributes:
     - `__pycache__/`: Ignore Python bytecode cache directories.
@@ -9,3 +10,9 @@
     - `*.egg-info/`: Ignore Python egg info directories.
     - `.DS_Store`: Ignore macOS system files.
     - `*.log`: Ignore log files.
+    - `.idea/`: Ignore IDE configuration directories.
+    - `*.swp`: Ignore swap files created by text editors.
+    - `coverage/`: Ignore test coverage reports.
+    - `dist/`: Ignore distribution directories for packaging.
+    - `build/`: Ignore build output directories.
+    - `*.spec`: Ignore spec files, often created by packaging tools like PyInstaller.

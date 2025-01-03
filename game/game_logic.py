@@ -8,23 +8,23 @@ from game.player import Player
 
 
 class Game:
-    def __init__(self):
+    def __init__(self) -> None:
         pygame.init()
-        self.screen = pygame.display.set_mode((configs.config.SCREEN_WIDTH, configs.config.SCREEN_HEIGHT))
-        self.clock = pygame.time.Clock()
-        self.player = None
-        self.enemies = []
-        self.bullets = []
-        self.running = True
+        self.screen: pygame.Surface = pygame.display.set_mode((configs.config.SCREEN_WIDTH, configs.config.SCREEN_HEIGHT))
+        self.clock: pygame.time.Clock = pygame.time.Clock()
+        self.player: Player = None
+        self.enemies: list[Enemy] = []
+        self.bullets: list[Bullet] = []
+        self.running: bool = True
 
-    def setup(self):
+    def setup(self) -> None:
         self.player = Player(Vector2(self.screen.get_width() // 2, self.screen.get_height() - 50))
         # Initialize enemies here based on game level
         for i in range(5):  # Example of creating 5 enemies
             enemy = Enemy(Vector2(100 * i, 50))
             self.enemies.append(enemy)
 
-    def game_loop(self):
+    def game_loop(self) -> None:
         while self.running:
             self.handle_events()
             self.update()
@@ -32,7 +32,7 @@ class Game:
             self.render()
             self.clock.tick(configs.config.FPS)
 
-    def check_collisions(self):
+    def check_collisions(self) -> None:
         for bullet in self.bullets:
             for enemy in self.enemies:
                 if bullet.rect.colliderect(enemy.rect):
@@ -40,7 +40,7 @@ class Game:
                     self.bullets.remove(bullet)
                     # Handle what happens when an enemy is hit, e.g., increase score
 
-    def update(self):
+    def update(self) -> None:
         self.player.update()
         for enemy in self.enemies:
             enemy.update()
@@ -49,7 +49,7 @@ class Game:
             if bullet.rect.bottom < 0:
                 self.bullets.remove(bullet)
 
-    def render(self):
+    def render(self) -> None:
         self.screen.fill((0, 0, 0))  # Clear screen with black
         self.player.draw(self.screen)
         for enemy in self.enemies:
@@ -58,7 +58,7 @@ class Game:
             bullet.draw(self.screen)
         pygame.display.flip()
 
-    def handle_events(self):
+    def handle_events(self) -> None:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False

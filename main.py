@@ -1,7 +1,7 @@
 import pygame
 from game.game_logic import Game
 
-def main():
+def main() -> None:
     # Initialize pygame
     pygame.init()
     

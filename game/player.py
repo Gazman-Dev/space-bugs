@@ -3,40 +3,31 @@ from pygame.math import Vector2
 from game.bullet import Bullet
 
 import configs.config as config
+import assets.images as images
 
 
 class Player:
-    def __init__(self, start_position):
-        self.position = Vector2(start_position)
-        self.speed = config.PLAYER_SPEED
-        self.bullets = []
-        self.direction = Vector2(0, 0)  # Added direction attribute
+    def __init__(self, start_position: Vector2):
+        self.position: Vector2 = Vector2(start_position)
+        self.speed: float = config.PLAYER_SPEED
+        self.bullets: list = []
+        self.direction: Vector2 = Vector2(0, 0)
 
-    def move(self, direction):
-        if direction == "left":
-            self.direction = Vector2(-1, 0)
-        elif direction == "right":
-            self.direction = Vector2(1, 0)
-        elif direction == "up":
-            self.direction = Vector2(0, -1)
-        elif direction == "down":
-            self.direction = Vector2(0, 1)
-        else:
-            self.direction = Vector2(0, 0)
-        
+    def move(self, direction: Vector2) -> None:
+        self.direction = direction
+
         # Update position using Vector2
         self.position += self.direction * self.speed
 
-    def shoot(self):
+    def shoot(self) -> None:
         new_bullet = Bullet(self.position)
         self.bullets.append(new_bullet)
 
-    def draw(self, surface):
-        # Updated to use 'images' import if required
-        player_ship_image = pygame.image.load('images/player_ship.png')
+    def draw(self, surface: pygame.Surface) -> None:
+        player_ship_image = images.load('player_ship.png')
         surface.blit(player_ship_image, self.position)
 
-    def update(self):
-        self.move(self.direction)  # Integrate movement update
+    def update(self) -> None:
+        self.move(self.direction)
         for bullet in self.bullets:
             bullet.move()

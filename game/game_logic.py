@@ -1,10 +1,11 @@
 import pygame
+from pygame.math import Vector2  # Ensure that Vector2 is imported
 
 import configs.config
 from game.bullet import Bullet
 from game.enemy import Enemy
 from game.player import Player
-from pygame.math import Vector2  # Ensure that Vector2 is imported
+
 
 class Game:
     def __init__(self):

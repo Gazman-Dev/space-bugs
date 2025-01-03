@@ -3,7 +3,7 @@ from pygame.math import Vector2
 
 
 class Bullet:
-    def __init__(self, position, speed, direction, radius=5, color=(255, 0, 0)):
+    def __init__(self, position, speed=1, direction=1, radius=5, color=(255, 0, 0)):
         self.position = Vector2(position)
         self.speed = speed
         self.direction = Vector2(direction)

@@ -1,7 +1,9 @@
 import pygame
-import configs.config as config
 from pygame.math import Vector2
-import assets.images as images  # Updated import
+from game.bullet import Bullet
+
+import configs.config as config
+
 
 class Player:
     def __init__(self, start_position):
@@ -38,15 +40,3 @@ class Player:
         self.move(self.direction)  # Integrate movement update
         for bullet in self.bullets:
             bullet.move()
-
-class Bullet:
-    def __init__(self, start_position):
-        self.position = Vector2(start_position)  # Use Vector2 for position
-        self.speed = config.BULLET_SPEED
-
-    def move(self):
-        self.position.y -= self.speed  # Move the bullet up the screen
-
-    def draw(self, surface):
-        bullet_image = pygame.image.load('images/bullet.png')
-        surface.blit(bullet_image, self.position)

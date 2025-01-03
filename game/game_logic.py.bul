@@ -1,4 +1,4 @@
-- Purpose: Handles the main game logic and loop, managing updates, rendering, and player interactions.
+- Purpose: Handles the main game logic and loop, ensuring smooth gameplay by managing updates, rendering, and player interactions.
 - Imports:
   - import pygame
   - import configs.config
@@ -17,14 +17,26 @@
         - running: Boolean indicating the game's running state.
       - Methods:
         - setup():
-          - Initialize game elements such as player and enemies, make sure to use Vector for position.
+          - Instantiate and position game elements such as player and enemies; utilize Vector2 for positions.
         - game_loop():
-          - Continuously running loop that manages game states, event handling, and rendering.
+          - Execute continuously while the game is running:
+            - Call handle_events() to handle user input.
+            - Invoke update() to refresh game state, including player, enemies, and bullets.
+            - Employ check_collisions() to identify and manage intersections between objects.
+            - Use render() to update the display with drawn game elements.
+            - Employ clock control to maintain consistent frame rate.
         - check_collisions():
-          - Determine if any bullets have hit targets, and handle collisions accordingly.
+          - Detect and respond to any bullet interactions with targets, updating states as necessary.
         - update():
-          - Updates positions and state of all game objects.
+          - Refreshes positions and statuses of all relevant game objects, ensuring each is interactive.
+            - Update player by calling its internal methods.
+            - Update enemies, moving and managing activities.
+            - Manage bullets' trajectories and states.
         - render():
-          - Clears the screen and draws all game elements like player, enemies, bullets, etc.
+          - Prepare the display surface and render all game elements, including player, enemies, and bullets.
+            - Clear the screen at the beginning of each frame.
+            - Use each class’s draw method to render its current state.
         - handle_events():
-          - Processes user input events like keyboard and mouse interactions.
+          - Capture and process user input actions like keyboard presses and mouse activity.
+
+Adding detailed update and rendering methods allows each game component to handle its own changes and display in a cohesive and organized manner during the game loop. This separation supports readability and maintainability of game code by clearly defining and isolating responsibilities.

@@ -1,5 +1,6 @@
 import pygame
 from pygame.math import Vector2
+import random
 
 from configs.config import ENEMY_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
 from game.bullet import Bullet
@@ -16,8 +17,29 @@ class Enemy:
         self.size: Vector2 = Vector2((SCREEN_WIDTH / 10), (SCREEN_HEIGHT / 10))
         self.image = pygame.transform.scale(self.image, (int(self.size.x), int(self.size.y)))
         self.rect: pygame.Rect = pygame.Rect(self.position.x, self.position.y, self.size.x, self.size.y)
+        self.path: list[Vector2] = self.generate_random_path()
+        self.current_target_index: int = 0
+
+    def generate_random_path(self) -> list[Vector2]:
+        path = []
+        max_coordinates = 8
+        min_distance = 50  # Minimum distance between path points
+        for _ in range(max_coordinates):
+            while True:
+                new_point = Vector2(random.randint(0, SCREEN_WIDTH), random.randint(0, SCREEN_HEIGHT))
+                if all(new_point.distance_to(point) >= min_distance for point in path):
+                    path.append(new_point)
+                    break
+        return path
 
     def move(self) -> None:
+        if self.path:
+            target = self.path[self.current_target_index]
+            if self.position.distance_to(target) < self.speed:
+                self.current_target_index = (self.current_target_index + 1) % len(self.path)
+                target = self.path[self.current_target_index]
+            self.direction = (target - self.position).normalize()
+        
         self.position += self.direction * self.speed
         self.rect.topleft = (self.position.x, self.position.y)
 

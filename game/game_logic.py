@@ -1,7 +1,9 @@
 import pygame
+import random
+import time
 from pygame.math import Vector2
 
-import configs.config
+from configs.config import MAX_ENEMIES, SCREEN_WIDTH, SCREEN_HEIGHT, FPS
 from game.bullet import Bullet
 from game.enemy import Enemy
 from game.player import Player
@@ -10,27 +12,34 @@ from game.player import Player
 class Game:
     def __init__(self) -> None:
         pygame.init()
-        self.screen: pygame.Surface = pygame.display.set_mode((configs.config.SCREEN_WIDTH, configs.config.SCREEN_HEIGHT))
+        self.screen: pygame.Surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock: pygame.time.Clock = pygame.time.Clock()
         self.player: Player = None
         self.enemies: list[Enemy] = []
         self.bullets: list[Bullet] = []
         self.running: bool = True
+        self.last_enemy_spawn_time: float = time.time()
 
     def setup(self) -> None:
-        self.player = Player()
+        self.player = Player(Vector2(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 30))
         # Initialize enemies here based on game level
-        for i in range(5):  # Example of creating 5 enemies
-            enemy = Enemy(Vector2(100 * i, 50))
+        self.spawn_enemies()
+
+    def spawn_enemies(self) -> None:
+        current_time = time.time()
+        if len(self.enemies) < MAX_ENEMIES and (current_time - self.last_enemy_spawn_time) > 2:
+            enemy = Enemy(Vector2(random.randint(0, SCREEN_WIDTH - 50), 50))
             self.enemies.append(enemy)
+            self.last_enemy_spawn_time = current_time
 
     def game_loop(self) -> None:
         while self.running:
             self.handle_events()
             self.update()
             self.check_collisions()
-            self.render()
-            self.clock.tick(configs.config.FPS)
+            self.draw()
+            self.clock.tick(FPS)
+            self.spawn_enemies()
 
     def check_collisions(self) -> None:
         for bullet in self.bullets:
@@ -49,7 +58,7 @@ class Game:
             if bullet.rect().bottom < 0:
                 self.bullets.remove(bullet)
 
-    def render(self) -> None:
+    def draw(self) -> None:
         self.screen.fill((0, 0, 0))  # Clear screen with black
         self.player.draw(self.screen)
         for enemy in self.enemies:
@@ -64,7 +73,6 @@ class Game:
                 self.running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    # Add bullet firing logic
                     bullet = Bullet(Vector2(self.player.rect.centerx, self.player.rect.top))
                     self.bullets.append(bullet)
 

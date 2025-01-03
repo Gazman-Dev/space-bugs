@@ -2,7 +2,7 @@
 - Imports:
   - import pygame
   - import math
-  - from path.to.vector2_module import Vector2
+  - import path/to/vector2_module (Ensure this is the correct path for Vector2)
 - Definitions:
   - Classes:
     - Bullet:

@@ -3,7 +3,9 @@ from pygame.math import Vector2
 from game.bullet import Bullet
 
 import configs.config as config
-import assets.images as images
+import pygame_assets as assets
+
+assets.init()
 
 
 class Player:
@@ -12,6 +14,7 @@ class Player:
         self.speed: float = config.PLAYER_SPEED
         self.bullets: list = []
         self.direction: Vector2 = Vector2(0, 0)
+        assets.config.base = 'images'
 
     def move(self, direction: Vector2) -> None:
         self.direction = direction
@@ -24,7 +27,7 @@ class Player:
         self.bullets.append(new_bullet)
 
     def draw(self, surface: pygame.Surface) -> None:
-        player_ship_image = images.load('player_ship.png')
+        player_ship_image = assets['player_ship.png']
         surface.blit(player_ship_image, self.position)
 
     def update(self) -> None:

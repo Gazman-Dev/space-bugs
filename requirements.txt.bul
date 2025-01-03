@@ -4,3 +4,4 @@
   - Attributes:
     - pygame==2.6.1 # Pygame library for handling game graphics and events
     - numpy==1.26.0 # Numpy for numerical calculations (if relevant)
+    - pygame-assets==0.1

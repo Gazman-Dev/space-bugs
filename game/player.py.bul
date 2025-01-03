@@ -3,7 +3,7 @@
   - import pygame
   - import configs.config as config
   - import pygame.math.Vector2
-  - import assets.images as images
+  - import pygame_assets as assets
 
 - Definitions:
   - Classes:

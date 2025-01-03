@@ -17,7 +17,11 @@
           - Initializes bullet using provided initial position, speed, and direction. Sets visual properties like radius and color using default or provided values.
         - move():
           - Updates bullet's position by calculating the new coordinates based on its speed, direction, and time elapsed since the last update.
+        - update():
+          - Calls the move method to update the bullet's position in-game, preparing it for the next game loop cycle.
         - draw(surface):
           - Renders the bullet as a circle onto the provided surface using its position, radius, and color attributes.
+        - render(surface):
+          - Calls the draw method to visually present the bullet on the screen during the rendering phase of the game loop.
         - is_off_screen(screen_size):
           - Checks if the bullet's position is outside the boundaries of the game screen to determine if it should be removed.

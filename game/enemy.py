@@ -1,4 +1,5 @@
 import pygame
+from pygame.math import Vector2
 from game.bullet import Bullet
 from configs.config import ENEMY_SPEED
 
@@ -7,14 +8,14 @@ class Enemy:
     def __init__(self, position):
         self.position = position
         self.speed = ENEMY_SPEED
-        self.direction = pygame.Vector2(0, 1)  # Assuming the enemy moves downwards initially
+        self.direction = Vector2(0, 1)  # Assuming the enemy moves downwards initially
         self.bullets = []
 
     def move(self):
         self.position += self.direction * self.speed
 
     def shoot(self):
-        bullet_position = self.position + pygame.Vector2(0, 1)  # Example: starting just below the enemy
+        bullet_position = self.position + Vector2(0, 1)  # Example: starting just below the enemy
         bullet = Bullet(bullet_position)  # Assuming a Bullet class is defined elsewhere
         self.bullets.append(bullet)
 
@@ -28,5 +29,14 @@ class Enemy:
         if enemy_rect.colliderect(obj):
             return True
         return False
+
+    def update(self):
+        self.move()
+        # Check for bullet collisions or other updates needed for each enemy
+
+    def render(self, screen):
+        self.draw(screen)
+        for bullet in self.bullets:
+            bullet.draw(screen)  # Assuming Bullet class has a draw method
 
 # Note: The Bullet class and its implementation should be defined elsewhere in the project.

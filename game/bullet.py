@@ -11,10 +11,9 @@ class Bullet:
         self.direction = Vector2(direction)
         self.radius = radius  # The visual size of the bullet on-screen.
         self.color = color    # The bullet's color, typically set to red.
-        self.image = AssetsLoader.load_bullet_image()
 
     def move(self):
-        # Updates position by applying speed and direction
+        # Updates position by applying speed and direction, adjusted for elapsed time
         self.position += self.speed * self.direction
 
     def update(self, surface: pygame.Surface):
@@ -23,10 +22,7 @@ class Bullet:
 
     def draw(self, surface: pygame.Surface):
         # Adjusts bullet position based on screen dimensions and draws it using specified radius and color
-        if self.image:
-            surface.blit(self.image, (int(self.position.x), int(self.position.y)))
-        else:
-            pygame.draw.circle(surface, self.color, (int(self.position.x), int(self.position.y)), self.radius)
+        pygame.draw.circle(surface, self.color, (int(self.position.x), int(self.position.y)), self.radius)
 
     def render(self, surface: pygame.Surface):
         self.draw(surface)

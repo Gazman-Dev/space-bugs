@@ -6,7 +6,7 @@
   - Classes:
     - Bullet:
       - Attributes:
-        - position: Vector2 - starting coordinates for the bullet.
+        - position: Vector2 - starting  coordinates for the bullet.
         - speed: float - bullet speed value.
         - direction: Vector2 - direction vector for bullet movement.
         - radius: int - bullet's visual size on the screen.

@@ -40,13 +40,14 @@ class Game:
                     # Handle what happens when an enemy is hit, e.g., increase score
 
     def update(self):
-        self.player.update()
-        for enemy in self.enemies:
-            enemy.update()
-        for bullet in self.bullets:
-            bullet.update()
-            if bullet.rect.bottom < 0:
-                self.bullets.remove(bullet)
+        pass
+        # self.player.update()
+        # for enemy in self.enemies:
+        #     enemy.update()
+        # for bullet in self.bullets:
+        #     bullet.update()
+        #     if bullet.rect.bottom < 0:
+        #         self.bullets.remove(bullet)
 
     def render(self):
         self.screen.fill((0, 0, 0))  # Clear screen with black
@@ -66,7 +67,7 @@ class Game:
                     # Add bullet firing logic
                     bullet = Bullet(Vector2(self.player.rect.centerx, self.player.rect.top))
                     self.bullets.append(bullet)
-            self.player.handle_event(event)
+
 
 if __name__ == "__main__":
     game = Game()

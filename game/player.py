@@ -1,8 +1,8 @@
 import pygame
 from pygame.math import Vector2
-from game.bullet import Bullet
 
 import configs.config as config
+from game.bullet import Bullet
 from game.utils.assets_loader import AssetsLoader
 
 
@@ -22,7 +22,7 @@ class Player:
         self.position += self.direction * self.speed
 
         # Ensure player stays within screen bounds using config values
-        screen_size = config.SCREEN_SIZE
+        screen_size = [config.SCREEN_WIDTH, config.SCREEN_HEIGHT]
         self.position.x = max(0, min(self.position.x, screen_size[0] - self.size.x))
         self.position.y = max(0, min(self.position.y, screen_size[1] - self.size.y))
 

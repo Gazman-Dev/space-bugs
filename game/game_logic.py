@@ -41,7 +41,7 @@ class Game:
                     # Handle what happens when an enemy is hit, e.g., increase score
 
     def update(self) -> None:
-        self.player.update()
+        self.player.update(self.screen)
         for enemy in self.enemies:
             enemy.update()
         for bullet in self.bullets:

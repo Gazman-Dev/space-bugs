@@ -1,4 +1,4 @@
-- Purpose: Implement enemy behavior, including movement, shooting, collision detection, and path-following capabilities, to allow dynamic interactions within the game by utilizing a randomly generated closed path with up to 8 coordinates. Ensure paths comply with screen boundaries and utilize pygame's Vector2 for precise movement calculations, including maintaining a minimum distance between path coordinates for smooth transitions.
+- Purpose: Implement enemy behavior, including movement, shooting, collision detection, and path-following capabilities. Allow dynamic interactions within the game by utilizing a randomly generated closed path with up to 8 coordinates. Ensure paths comply with screen boundaries and utilize pygame's Vector2 for precise movement calculations, maintaining a minimum distance between path coordinates for smooth transitions.
 
 - Imports:
   - import pygame
@@ -25,7 +25,7 @@
         - __init__(position: Vector2) -> None:
           - Initialize an enemy at a given position, set speed from configuration, generate a closed random path within boundaries with each point distanced appropriately, and set the first path point as the initial target. Load and scale enemy image, initialize an empty bullets list, and set up rect for collision management.
         - move() -> None:
-          - Advance toward the current path target, update direction based on proximity, adjust rect positioning. Upon reaching a target, shift to the next path coordinate and start over if all are traversed.
+          - Calculate the vector between the current position and the target path coordinate. Normalize this vector to get the movement direction if not already zero. Calculate the travel vector by scaling the direction with the enemy's speed. If the travel vector is shorter than needed to reach the target, increment the position by it. Otherwise, compute any excess using remaining travel distance beyond target, update position, and move to next path segment, eventually looping back if reaching the end.
         - shoot() -> None:
           - Instantiate a Bullet object beneath the enemy position, add it to the bullets list, maintaining projectile tracking.
         - draw(screen: pygame.Surface) -> None:

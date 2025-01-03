@@ -1,9 +1,8 @@
-- Purpose: Implement enemy behavior, including movement, shooting, collision detection, and path-following capabilities. Allow dynamic interactions within the game by utilizing a randomly generated closed path with up to 8 coordinates. Ensure paths comply with screen boundaries and utilize pygame's Vector2 for precise movement calculations, maintaining a minimum distance between path coordinates for smooth transitions.
+- Purpose: Implement enemy behavior, including movement, shooting, collision detection, and path-following capabilities, to allow dynamic interactions within the game by utilizing a randomly generated closed path with up to 8 coordinates. Ensure paths comply with screen boundaries and utilize pygame's Vector2 for precise movement calculations, including maintaining a minimum distance between path coordinates for smooth transitions.
 
 - Imports:
   - import pygame
   - from pygame.math import Vector2
-  - from game.bullet import Bullet
   - from configs.config import ENEMY_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
   - from utils.assets_loader import load_enemy_asset
   - import random
@@ -15,7 +14,6 @@
         - position: Vector2 - Initial position of enemy on the screen for effective position handling.
         - speed: float - Speed for the enemy's movement, configured from ENEMY_SPEED.
         - direction: Vector2 - Current movement direction; dynamically adjusted based on the current target coordinate.
-        - bullets: List[Bullet] - Collection of bullets fired by the enemy to manage active projectiles.
         - image: pygame.Surface - Graphical representation of the enemy, loaded from assets for visual display.
         - size: Vector2 - Size of the enemy, proportionally scaled to the screen dimensions for consistent visibility.
         - rect: pygame.Rect - Defines the rectangular area representing the enemy's current location on the screen for positioning and collision detection.
@@ -23,16 +21,14 @@
         - current_target_index: int - Index of the current target coordinate from the path to achieve incremental movement.
       - Methods:
         - __init__(position: Vector2) -> None:
-          - Initialize an enemy at a given position, set speed from configuration, generate a closed random path within boundaries with each point distanced appropriately, and set the first path point as the initial target. Load and scale enemy image, initialize an empty bullets list, and set up rect for collision management.
+          - Initialize an enemy at a given position, set speed from configuration, generate a closed random path within boundaries with each point distanced appropriately, and set the first path point as the initial target. Load and scale enemy image, and set up rect for collision management.
         - move() -> None:
           - Calculate the vector between the current position and the target path coordinate. Normalize this vector to get the movement direction if not already zero. Calculate the travel vector by scaling the direction with the enemy's speed. If the travel vector is shorter than needed to reach the target, increment the position by it. Otherwise, compute any excess using remaining travel distance beyond target, update position, and move to next path segment, eventually looping back if reaching the end.
-        - shoot() -> None:
-          - Instantiate a Bullet object beneath the enemy position, add it to the bullets list, maintaining projectile tracking.
         - draw(screen: pygame.Surface) -> None:
-          - Draw the enemy and its bullets on the screen using their current positions and loaded image assets for visual fidelity.
+          - Draw the enemy
         - check_collision(obj: pygame.Rect) -> bool:
           - Determine collision with another object by checking overlap of rects.
         - update(screen: pygame.Surface) -> None:
-          - Refresh enemy state with movement execution, path cycling, bullet handling, updating rect positions.
+          - Refresh enemy state with movement execution, path cycling, updating rect positions.
         - generate_random_path() -> None:
           - Construct a closed path of up to 8 random Vector2 coordinates, ensuring each is within screen limits and a predefined minimum distance from others, to create a seamless movement cycle.

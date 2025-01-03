@@ -26,8 +26,6 @@ class Game:
         self.player = Player()
         # Initialize enemies here based on game level
         self.spawn_enemies()
-        # Initialize toolbar for game stats display
-        self.toolbar.setup()
 
     def spawn_enemies(self) -> None:
         current_time = time.time()

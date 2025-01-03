@@ -23,6 +23,7 @@
         - running: bool - Indicates if the game loop is currently active.
         - last_enemy_spawn_time: float - Time reference for the last enemy spawn event.
         - toolbar: Toolbar - Interface component for displaying player health and score.
+        - player_health: Int - Player health, starts with 5
 
       - Methods:
         - setup() -> None:

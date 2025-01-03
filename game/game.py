@@ -1,7 +1,7 @@
 import pygame
 from game.snake import Snake
 from game.food import Food
-from ui.toolbar import Toolbar
+from game.toolbar import Toolbar
 import configs.config as config
 
 class Game:

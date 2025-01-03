@@ -1,4 +1,4 @@
-- Purpose: Defines behavior and logic for enemy characters, including movement, shooting, drawing, collision detection, rendering, and updating within the game loop. Utilizes graphical assets, Vector2 for mapping directions, and adjusts object sizes proportionally to the screen size based on configurations. Ensures each component positions itself relative to the screen during gameplay updates.
+- Purpose: Defines behavior and logic for enemy characters, enabling interactions like movement, shooting, and collision detection. Ensures graphical representation and proportional sizing based on screen configurations, positioning, and updating within the game loop for consistent gameplay.
 
 - Imports:
   - import pygame
@@ -17,18 +17,17 @@
         - bullets: List[Bullet] - Collection of bullets fired by the enemy to manage active projectiles.
         - image: pygame.Surface - Graphical representation of the enemy, loaded from assets for visual display.
         - size: Vector2 - Size of the enemy, proportionally scaled to the screen dimensions for consistent visibility.
+        - rect: pygame.Rect - Defines the rectangular area representing the enemy's current location on the screen for positioning and collision detection.
       - Methods:
         - __init__(position: Vector2) -> None:
-          - Initialize the enemy by setting a given position, applying default speed and direction, loading and scaling an enemy image asset according to screen size, and preparing an empty bullets list.
+          - Initialize the enemy by setting a given position, applying default speed and direction, loading and scaling an enemy image asset according to screen size, preparing an empty bullets list, and setting up the rect property to match the image dimensions at the initial position.
         - move() -> None:
-          - Adjust position by adding the product of direction and speed to simulate movement across the game area.
+          - Adjust position by adding the product of direction and speed to simulate movement across the game area, updating the rect property accordingly.
         - shoot() -> None:
           - Create a Bullet object positioned just beneath the enemy, appending the bullet to the bullets list for tracking.
-        - draw(surface: pygame.Surface) -> None:
-          - Display the enemy at its current position on the provided surface using the loaded and scaled image.
+        - draw(screen: pygame.Surface) -> None:
+          - Display the enemy and its active bullets on the designated screen surface, ensuring their positions are adjusted relative to the screen, using the loaded and scaled image asset for depiction.
         - check_collision(obj: pygame.Rect) -> bool:
-          - Verify if the enemy collides with another object by leveraging pygame's rectangle collision detection capabilities.
+          - Verify a collision with another object by checking overlap between their rect properties.
         - update(screen: pygame.Surface) -> None:
-          - Refresh the enemy's state by executing move, adjusting position relative to the current screen dimensions, and handling bullets that exceed screen boundaries.
-        - render(screen: pygame.Surface) -> None:
-          - Show the enemy and its active bullets on the designated screen surface during each game loop cycle, ensuring their positions are adjusted relative to the screen. Utilize the scaled image asset for enemy depiction.
+          - Refresh the enemy's state by executing move, adjusting position, maintaining rect alignment, and handling bullets that exceed screen boundaries.

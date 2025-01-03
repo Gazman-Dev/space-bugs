@@ -16,14 +16,15 @@
         - direction: pygame.math.Vector2 - Vector2 representation for player movement direction.
         - player_image: pygame.Surface - Visual asset for the player ship, obtained via assets_loader.
         - size: pygame.math.Vector2 - Represents player ship size proportionally, adapting to screen dimensions from config.
+        - rect: pygame.Rect - Defines rectangular boundary based on current position and size of the player ship for collision detection.
       - Methods:
         - move(self, direction: pygame.math.Vector2) -> None:
           - Updates player position by applying speed to direction vector for seamless movement with Vector2 math. Adjusts according to screen size for proportional navigation.
         - shoot(self) -> None:
           - Instantiates a new bullet object at the player's current locus and adds it to bullets list for further processing and rendering.
-        - draw(self, surface: pygame.Surface) -> None:
-          - Renders player ship image on surface, ensuring central alignment with current position. Scales image to proportionate size relative to screen configuration.
+        - draw(self, screen: pygame.Surface) -> None:
+          - Renders player ship image and bullets on the provided screen surface; ensures central alignment with current position and scales image to appropriate size. Positioning relates to the screen ensuring all game elements are proportionately displayed.
         - update(self, screen: pygame.Surface) -> None:
-          - Incorporates movement, shooting, and cycle adjustments for real-time gameplay. Adjusts position using input direction, ensures bullets are managed, and positions updates based on the screen's size.
-        - render(self, screen: pygame.Surface) -> None:
-          - Integrates rendering for player, enemies, and bullets, providing relative positioning based on screen reference. Successfully orchestrates game visual elements on screen ensuring proportional representation per screen dimensions.
+          - Incorporates movement, shooting, and cycle adjustments for real-time gameplay. Adjusts position using input direction, manages bullets, and ensures position updates based on the screen's size.
+        - update_rect(self) -> None:
+          - Refreshes the player's rect attribute, aligning it with the current position and size, enabling precise collision detection and screen boundary handling.

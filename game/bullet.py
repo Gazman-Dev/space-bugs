@@ -1,6 +1,7 @@
 import pygame
 from pygame.math import Vector2
-from path.to.assets_loader import load_bullet_image
+
+from game.utils.assets_loader import AssetsLoader
 
 
 class Bullet:
@@ -10,7 +11,7 @@ class Bullet:
         self.direction = Vector2(direction)
         self.radius = radius  # The visual size of the bullet on-screen.
         self.color = color    # The bullet's color, typically set to red.
-        self.image = load_bullet_image()
+        self.image = AssetsLoader.load_bullet_image()
 
     def move(self):
         self.position += self.speed * self.direction

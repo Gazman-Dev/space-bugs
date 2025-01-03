@@ -1,9 +1,9 @@
 import pygame
 
 class AssetsLoader:
-    PLAYER_IMAGE_PATH: str = "assets/player.png"
-    ENEMY_IMAGE_PATH: str = "assets/enemy.png"
-    BULLET_IMAGE_PATH: str = "assets/bullet.png"
+    PLAYER_IMAGE_PATH: str = "images/player.png"
+    ENEMY_IMAGE_PATH: str = "images/enemy.png"
+    BULLET_IMAGE_PATH: str = "images/bullet.png"
 
     @staticmethod
     def load_image(image_path: str) -> pygame.Surface:
@@ -32,4 +32,3 @@ class AssetsLoader:
 # Ensure other game components such as player, enemies, and bullets
 # reference the `assets_loader.py` for loading their associated images.
 # Adjust the imports in those files accordingly.
-```

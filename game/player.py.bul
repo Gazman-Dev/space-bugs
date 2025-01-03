@@ -1,25 +1,26 @@
-- Purpose: Manages player controls and actions, including movement and shooting mechanics, and rendering of player and bullet images. It utilizes assets_loader.py to load player-related image assets and handles updating the game state for player and bullets.
+- Purpose: Manages player controls and actions, including movement and shooting mechanics. It handles the rendering of player and bullet images using assets from assets_loader.py and updates the game state for the player and bullets.
+
 - Imports:
   - import pygame
   - import configs.config as config
   - import pygame.math.Vector2
-  - import assets_loader as assets_loader
+  - import assets_loader
 
 - Definitions:
   - Classes:
     - Player:
       - Attributes:
-        - position: pygame.math.Vector2 - Initial coordinates of the player ship on the screen, using Vector2 for positions.
-        - speed: float - Speed at which the player moves, derived from config.PLAYER_SPEED.
-        - bullets: list - Holds bullets fired by the player.
-        - direction: pygame.math.Vector2 - Direction of player movement as a Vector2.
-        - player_image: pygame.Surface - Image of the player ship loaded from assets_loader.
+        - position: pygame.math.Vector2 - Sets the initial coordinates of the player ship on the screen with Vector2 for position tracking.
+        - speed: float - Determines the player's movement speed, obtained from config.PLAYER_SPEED.
+        - bullets: list - A collection of bullet objects fired by the player.
+        - direction: pygame.math.Vector2 - Represents the movement direction as a Vector2.
+        - player_image: pygame.Surface - The visual representation of the player ship, loaded using assets_loader.
       - Methods:
         - move(self, direction: pygame.math.Vector2) -> None:
-          - Update the player's position by adding speed, scaled by the direction vector, to the current position using Vector2.
+          - Adjusts the player's position by applying the speed, scaled according to the direction vector, resulting in smooth movement using Vector2 math.
         - shoot(self) -> None:
-          - Instantiate a new bullet object at the player's current position and append it to the bullets list.
+          - Creates a new bullet object located at the player's current position and stores it in the bullets list for tracking and rendering.
         - draw(self, surface: pygame.Surface) -> None:
-          - Render the player ship image, loaded from assets_loader, on the specified surface, centered at the player's current position.
+          - Displays the player ship image onto the provided surface, centering it at the player's current position.
         - update(self) -> None:
-          - Execute movement, shooting, and any necessary updates for each game cycle. Adjust player position based on direction, manage bullet list, and position any additional components as needed.
+          - Applies movement updates, triggers shooting, and performs any other necessary adjustments each game cycle. It updates the player's position based on input direction and manages the bullets list effectively.

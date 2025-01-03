@@ -1,9 +1,7 @@
-- Purpose: Represents bullet objects in the game, allowing for movement, collision detection, and rendering, with support for image assets.
+- Purpose: Represents bullet objects in the game, handling movement, collision detection, and rendering using simple shapes for display.
 - Imports:
   - import pygame
-  - from math import Vector2
   - from path.to.vector2_module import Vector2
-  - from path.to.assets_loader import load_bullet_image
 - Definitions:
   - Classes:
     - Bullet:
@@ -13,17 +11,16 @@
         - direction: Vector2 - direction vector for bullet movement.
         - radius: int - bullet's visual size on the screen.
         - color: tuple[int, int, int] - RGB color value of the bullet.
-        - image: pygame.Surface - visual representation of the bullet using an image asset.
       - Methods:
         - __init__(position: Vector2, speed: float, direction: Vector2, radius: int = 5, color: tuple[int, int, int] = (255, 0, 0)):
-          - Initializes the bullet with a given position, speed, direction, radius, and color. Loads the bullet image asset for rendering.
+          - Initializes the bullet with a given position, speed, direction, radius, and color, setting the necessary attributes for its representation as a circle.
         - move():
           - Computes updated bullet position by applying speed and direction to current coordinates, adjusted for time elapsed.
         - update():
           - Executes position update of the bullet through its move method, preparing it for subsequent game interactions.
         - draw(surface: pygame.Surface):
-          - Displays the bullet image on the given surface at its current position. Adapts rendering to radius and color if image loading fails.
+          - Draws a circle representing the bullet on the given surface at its current position using the specified radius and color.
         - render(surface: pygame.Surface):
-          - Triggers the draw function to render the bullet using image assets within the game loop’s render phase.
+          - Calls the draw function to render the bullet as a shape within the game loop's render phase.
         - is_off_screen(screen_size: tuple[int, int]) -> bool:
           - Verifies if the bullet's position exceeds the boundaries of the specified screen size, indicating necessity for removal.

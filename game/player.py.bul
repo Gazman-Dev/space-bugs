@@ -9,7 +9,7 @@
 - Definitions:
   - Classes:
     - Player:
-      - Attributes:
+      - Attributes:  
         - position: pygame.math.Vector2 - Sets initial coordinates of the player ship on screen; utilizes Vector2 for precise position tracking.
         - speed: float - Defined by config.PLAYER_SPEED; influences player's movement velocity.
         - direction: pygame.math.Vector2 - Vector2 representation for player movement direction.

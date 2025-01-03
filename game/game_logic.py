@@ -21,7 +21,7 @@ class Game:
         self.last_enemy_spawn_time: float = time.time()
 
     def setup(self) -> None:
-        self.player = Player(Vector2(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 30))
+        self.player = Player()
         # Initialize enemies here based on game level
         self.spawn_enemies()
 
@@ -42,12 +42,24 @@ class Game:
             self.spawn_enemies()
 
     def check_collisions(self) -> None:
+        bullets_to_remove = []
+        enemies_to_remove = []
+
         for bullet in self.bullets:
             for enemy in self.enemies:
                 if bullet.rect().colliderect(enemy.rect):
-                    self.enemies.remove(enemy)
-                    self.bullets.remove(bullet)
+                    enemies_to_remove.append(enemy)
+                    bullets_to_remove.append(bullet)
                     # Handle what happens when an enemy is hit, e.g., increase score
+
+        # Remove bullets and enemies after iteration to avoid modifying the list during iteration
+        for bullet in bullets_to_remove:
+            if bullet in self.bullets:
+                self.bullets.remove(bullet)
+
+        for enemy in enemies_to_remove:
+            if enemy in self.enemies:
+                self.enemies.remove(enemy)
 
     def update(self) -> None:
         self.player.update(self.screen)

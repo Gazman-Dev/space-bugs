@@ -4,7 +4,7 @@
   - from path.to.vector2_module import Vector2
 - Definitions:
   - Classes:
-    - Bullet:
+    - Bullet: 
       - Attributes:
         - position: Vector2 - starting  coordinates for the bullet.
         - speed: float - bullet speed value.

@@ -6,11 +6,11 @@ from game.utils.assets_loader import AssetsLoader
 
 class Bullet:
     def __init__(self, position: Vector2, speed: float = 1, direction: Vector2 = Vector2(1, 0), radius: int = 5, color: tuple[int, int, int] = (255, 0, 0)):
-        self.position = Vector2(position)
-        self.speed = speed
-        self.direction = Vector2(direction)
-        self.radius = radius  # The visual size of the bullet on-screen.
-        self.color = color    # The bullet's color, typically set to red.
+        self.position = Vector2(position)  # starting coordinates for the bullet.
+        self.speed = speed                 # bullet speed value.
+        self.direction = Vector2(direction)# direction vector for bullet movement.
+        self.radius = radius               # bullet's visual size on the screen.
+        self.color = color                 # RGB color value of the bullet.
 
     def move(self):
         # Updates position by applying speed and direction, adjusted for elapsed time

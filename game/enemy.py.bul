@@ -8,7 +8,7 @@
   - from utils.assets_loader import load_enemy_asset
   - import random
 
-- Definitions:
+- Definitions: 
   - Classes:
     - Enemy:
       - Attributes:

@@ -5,7 +5,7 @@ from game.utils.assets_loader import AssetsLoader
 
 
 class Bullet:
-    def __init__(self, position: Vector2, speed: float = 1, direction: Vector2 = Vector2(1, 0), radius: int = 5, color: tuple[int, int, int] = (255, 0, 0)):
+    def __init__(self, position: Vector2, speed: float = 5, direction: Vector2 = Vector2(0, -1), radius: int = 5, color: tuple[int, int, int] = (255, 0, 0)):
         self.position = Vector2(position)  # starting coordinates for the bullet.
         self.speed = speed                 # bullet speed value.
         self.direction = Vector2(direction)# direction vector for bullet movement.

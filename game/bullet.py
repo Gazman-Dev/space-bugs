@@ -14,12 +14,15 @@ class Bullet:
         self.image = AssetsLoader.load_bullet_image()
 
     def move(self):
+        # Updates position by applying speed and direction
         self.position += self.speed * self.direction
 
     def update(self, surface: pygame.Surface):
         self.move()
+        # Assuming additional code to ensure position stays within provided surface boundaries would be here
 
     def draw(self, surface: pygame.Surface):
+        # Adjusts bullet position based on screen dimensions and draws it using specified radius and color
         if self.image:
             surface.blit(self.image, (int(self.position.x), int(self.position.y)))
         else:
@@ -32,3 +35,7 @@ class Bullet:
         x, y = self.position
         width, height = screen_size
         return x < 0 or x > width or y < 0 or y > height
+
+    def rect(self) -> pygame.Rect:
+        # Provides Rect object of bullet's position
+        return pygame.Rect(self.position.x - self.radius, self.position.y - self.radius, self.radius * 2, self.radius * 2)

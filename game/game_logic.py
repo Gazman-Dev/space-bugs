@@ -1,5 +1,5 @@
 import pygame
-from pygame.math import Vector2  # Ensure that Vector2 is imported
+from pygame.math import Vector2
 
 import configs.config
 from game.bullet import Bullet

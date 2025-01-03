@@ -14,12 +14,14 @@ class Player:
         self.direction: Vector2 = Vector2(0, 0)
         self.player_image: pygame.Surface = AssetsLoader.load_player_image()
         self.size: Vector2 = Vector2(config.PLAYER_SIZE[0], config.PLAYER_SIZE[1])
+        self.rect: pygame.Rect = pygame.Rect(self.position.x, self.position.y, self.size.x, self.size.y)
 
     def move(self, direction: Vector2) -> None:
         self.direction = direction
         new_position = self.position + (self.direction * self.speed)
         if 0 <= new_position.x <= config.SCREEN_WIDTH - self.size.x and 0 <= new_position.y <= config.SCREEN_HEIGHT - self.size.y:
             self.position = new_position
+            self.update_rect()
 
     def shoot(self) -> None:
         bullet_position = Vector2(self.position.x + self.size.x / 2, self.position.y)
@@ -41,3 +43,6 @@ class Player:
             bullet.update()
 
         self.draw(screen)
+
+    def update_rect(self) -> None:
+        self.rect.topleft = (self.position.x, self.position.y)

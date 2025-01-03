@@ -1,9 +1,10 @@
-- Purpose: Defines behavior and logic for enemy characters, including movement, shooting, drawing, collision detection, rendering, and updating within the game loop.
+- Purpose: Defines behavior and logic for enemy characters, including movement, shooting, drawing, collision detection, rendering, and updating within the game loop, while incorporating graphical assets.
 - Imports:
   - import pygame
   - from pygame.math import Vector2
   - from game.bullet import Bullet
   - from configs.config import ENEMY_SPEED
+  - from utils.assets_loader import load_enemy_asset
 - Definitions:
   - Classes:
     - Enemy:
@@ -12,16 +13,19 @@
         - speed: float - Speed for the enemy's movement, configured from ENEMY_SPEED.
         - direction: Vector2 - Current movement direction, initialized to downwards for vertical movement.
         - bullets: List[Bullet] - Collection of bullets fired by the enemy, for managing active projectiles.
+        - image: pygame.Surface - Graphical representation of the enemy, loaded from assets for visual display.
       - Methods:
+        - __init__(position: Vector2) -> None:
+          - Initialize the enemy with a given position, set default speed and direction, load enemy image asset, and prepare an empty bullets list.
         - move() -> None:
           - Update the position by adding the scaled direction with speed, reflecting the enemy's movement across the game area.
         - shoot() -> None:
           - Instantiate a Bullet object starting just beneath the enemy; the bullet is appended to the bullets list for tracking.
         - draw(surface: pygame.Surface) -> None:
-          - Render the enemy as a red square at its position on the screen surface provided, utilizing pygame's drawing capabilities.
+          - Render the enemy using the loaded image at its current position on the screen surface provided, utilizing pygame's sprite capabilities.
         - check_collision(obj: pygame.Rect) -> bool:
           - Determine if this enemy intersects with another object using pygame's collision detection via rectangular boundaries.
         - update() -> None:
           - Refresh the enemy's state by invoking move, inspecting for any bullet collisions, and handling bullets that move off-screen.
         - render(screen: pygame.Surface) -> None:
-          - Display the enemy and its active bullets on the provided screen surface during each cycle of the game loop.
+          - Display the enemy and its active bullets on the provided screen surface during each cycle of the game loop. Make use of the pre-loaded image asset for visual representation.

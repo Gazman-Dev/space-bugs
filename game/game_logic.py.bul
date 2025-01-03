@@ -1,6 +1,6 @@
 - Purpose: Implements the main game loop, orchestrating efficient game updates, rendering, player interactions, and enemy behavior. Integrates toolbar updates and manages player's health and scoring through collision detection and game state changes.
 
-- Imports:
+- Imports: 
   - import pygame
   - from configs.config import MAX_ENEMIES
   - from game.player import Player

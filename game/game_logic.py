@@ -21,10 +21,10 @@ class Game:
         self.running: bool = True
         self.last_enemy_spawn_time: float = time.time()
         self.toolbar: Toolbar = Toolbar()  # Initialize toolbar
+        self.player_health: int = 5  # Initialize player health
 
     def setup(self) -> None:
-        self.player = Player()
-        # Initialize enemies here based on game level
+        self.player = Player(Vector2(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 60))  # Initialize player at starting coordinates
         self.spawn_enemies()
 
     def spawn_enemies(self) -> None:
@@ -42,7 +42,7 @@ class Game:
             self.draw()
             self.clock.tick(FPS)
             self.spawn_enemies()
-            self.toolbar.update(self.player.health, self.player.score)  # Update toolbar with live stats
+            self.toolbar.update(self.player_health, self.player.score)  # Update toolbar with live stats
 
     def check_collisions(self) -> None:
         bullets_to_remove = []

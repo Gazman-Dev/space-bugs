@@ -3,7 +3,8 @@ from pygame.math import Vector2
 
 from configs.config import ENEMY_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
 from game.bullet import Bullet
-from utils.assets_loader import load_enemy_asset
+from game.utils.assets_loader import AssetsLoader
+
 
 class Enemy:
     def __init__(self, position: Vector2) -> None:
@@ -11,7 +12,7 @@ class Enemy:
         self.speed: float = ENEMY_SPEED
         self.direction: Vector2 = Vector2(0, 1)  # Assuming the enemy moves downwards initially
         self.bullets: list[Bullet] = []
-        self.image: pygame.Surface = load_enemy_asset()
+        self.image: pygame.Surface = AssetsLoader.load_enemy_image()
         self.size: Vector2 = Vector2((SCREEN_WIDTH / 10), (SCREEN_HEIGHT / 10))
         self.image = pygame.transform.scale(self.image, (int(self.size.x), int(self.size.y)))
         self.rect: pygame.Rect = pygame.Rect(self.position.x, self.position.y, self.size.x, self.size.y)

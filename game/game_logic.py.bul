@@ -1,4 +1,4 @@
-- Purpose: Executes the main game loop, ensuring efficient handling of game updates, rendering processes, and player interactions for smooth gameplay, with type hints included for clarity.
+- Purpose: Executes the main game loop, ensuring efficient handling of game updates, rendering processes, player interactions, and random enemy behavior for smooth gameplay, with type hints included for clarity.
 
 - Imports:
   - import pygame
@@ -7,6 +7,8 @@
   - import game.enemy
   - import game.bullet
   - import pygame.math.Vector2
+  - import random
+  - import time
 
 - Definitions:
   - Classes:
@@ -18,16 +20,19 @@
         - enemies: list[game.enemy.Enemy] - Collection of Enemy instances actively present in the game.
         - bullets: list[game.bullet.Bullet] - Collection of active Bullet instances on the screen.
         - running: bool - Boolean flag indicating whether the game loop is active.
+        - last_enemy_spawn_time: float - Timestamp of when the last enemy was spawned to manage delay.
       - Methods:
         - setup() -> None:
-          - Initialize game elements like player and enemies with starting positions utilizing Vector2 for precise coordinate handling.
+          - Initialize game elements like the player with a starting position using Vector2 for precise coordinates, prepare enemies with initial setup such as setting up attributes.
+        - spawn_enemies() -> None:
+          - If enough delay has passed since the last spawn time and the number of enemies is beneath the maximum, generate a random number of enemies, each with eight predefined waypoints, to randomly appear and follow paths. Reset the spawn time.
         - game_loop() -> None:
-          - Runs while the game is active, ensuring real-time processing by capturing user inputs, updating state variables of game elements, assessing collisions, rendering updated states, and maintaining a consistent frame rate.
+          - Continues executing while the running flag is true; captures inputs, systematically manages state updates for game elements, evaluates collisions, renders updated states, maintains consistent frame rates, and calls enemy spawning method.
         - check_collisions() -> None:
-          - Evaluate bullet interactions with target entities, altering game state as necessary to reflect the outcomes of these interactions.
+          - Assess interactions between bullets and target entities, updating game states according to the results of these interactions.
         - update() -> None:
-          - Systematically update the positions and states of game objects; update the player, enemies, and bullets while considering interactions within screen boundaries.
+          - Sequentially update game objects' positions and states: update the player, enemies including path follow logic, and bullets, with attention to interactions within the screen bounds.
         - draw() -> None:
-          - Clear the display, then call the draw method for all game elements (player, enemies, bullets), providing the screen as the reference surface for each to render themselves appropriately.
+          - Cleanse the screen, then summon the draw method for each game object (player, enemies, bullets), giving the screen as the target surface so each renders themselves accordingly.
         - handle_events() -> None:
-          - Capture events from pygame's event queue. If the space key is pressed, create a new bullet instance with position set to the player’s current position, direction set using Vector2 for upward movement, and add it to the bullets list. Handle other user-generated inputs to influence game dynamics, managing interactions from keyboards and other input mediums.
+          - Collect events from pygame's event queue. Detect if the space bar is pressed and create a bullet instance with position linked to the player’s present position; set bullet direction via Vector2 for upward movement, append to bullets list, manage user inputs, and influence game dynamics.

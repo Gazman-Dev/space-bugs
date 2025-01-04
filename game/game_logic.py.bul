@@ -1,4 +1,4 @@
-- Purpose: Implements the main game loop while directly managing player health and score. Integrates game logic to handle collision detection, events, and score updates without external dependencies on player or toolbar files.
+- Purpose: Implements the main game loop while directly managing player health and score. Integrates game logic to handle collision detection, events, and score updates, ensuring responsive gameplay interactions.
 
 - Imports: 
   - import pygame
@@ -28,22 +28,25 @@
     
       - Methods:
         - setup() -> None:
-          - Initialize core game components, such as the player, screen settings, enemies, bullets, and toolbar. Reset health and score to start values.
+          - Initialize core game components, including the player, screen settings, enemies, bullets, and toolbar. Reset health and score to initial values.
 
         - spawn_enemies() -> None:
-          - Evaluate spawn conditions based on time and existing enemies. Populate the enemy list with new instances and adjust spawn timings.
+          - Spawn new enemies based on elapsed time and current enemy count. Manage spawn timing and add to the enemy list.
 
         - game_loop() -> None:
-          - Continuously run provided `running` is true. Process user input, update states, check collisions, and refresh visuals. Implement enemy spawning and directly manage score and health changes.
+          - Run the main game loop while `running` is true. Handle user inputs, update game elements, check for collisions, refresh screen, and manage enemy spawns, while regulating score and health.
 
-        - check_collisions() -> None:
-          - Evaluate collisions between bullets and either enemies or the player. In case of a bullet-enemy collision, eliminate the enemy and increase score. For player-hit scenarios, reduce health and check for game over.
+        - check_bullet_collisions() -> None:
+          - Traverse through active bullets and check them against enemies for collisions. Upon collision, remove both the bullet and enemy from the game and increment the player's score.
+
+        - check_player_collisions() -> None:
+          - Loop through enemies to ensure none collide with the player. On a collision occurrence, remove the enemy, decrement the player's health, and assess if the game should end if the player's health depletes.
 
         - update() -> None:
-          - Execute movement updates for player, enemies, and bullets, ensuring boundaries are respected. Directly update health and score within the game logic and reflect these in the toolbar.
+          - Update positions of player, enemies, and bullets with boundary checks. Reflect changes in health and score with corresponding toolbar updates.
 
         - draw() -> None:
-          - Clear the current display, then accurately render all entities like the player, enemies, bullets, and display current health and score on the toolbar.
+          - Clear and refresh the game display, drawing all active game elements like the player, enemies, and bullets. Display current health and score via the toolbar.
 
         - handle_events() -> None:
-          - Listen and respond to user inputs and pygame events, including player controls like firing bullets. Interpret specific key actions for in-game commands and deploy necessary logic for game exits or restarts.
+          - Process user inputs and system events. Interpret controls for player actions like bullet firing, and handle game pause, exit, or restart commands.

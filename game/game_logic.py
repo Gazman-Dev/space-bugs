@@ -48,6 +48,10 @@ class Game:
             self.toolbar.update(self.score, self.player_health)  # Update toolbar with live stats
 
     def check_collisions(self) -> None:
+        self.check_bullet_collisions()
+        self.check_player_collisions()
+
+    def check_bullet_collisions(self) -> None:
         bullets_to_remove = []
         enemies_to_remove = []
 
@@ -56,10 +60,8 @@ class Game:
                 if bullet.rect().colliderect(enemy.rect):
                     enemies_to_remove.append(enemy)
                     bullets_to_remove.append(bullet)
-                    # Increase score on hitting an enemy
                     self.score += 1
 
-        # Remove bullets and enemies after iteration to avoid modifying the list during iteration
         for bullet in bullets_to_remove:
             if bullet in self.bullets:
                 self.bullets.remove(bullet)
@@ -68,13 +70,24 @@ class Game:
             if enemy in self.enemies:
                 self.enemies.remove(enemy)
 
-        # Check player health/game over condition
-        if self.player_health <= 0:
-            self.running = False
-            print("Game Over!")  # Placeholder for game over sequence
+    def check_player_collisions(self) -> None:
+        enemies_to_remove = []
+
+        for enemy in self.enemies:
+            if self.player and enemy.rect.colliderect(self.player.rect):
+                enemies_to_remove.append(enemy)
+                self.player_health -= 1
+                if self.player_health <= 0:
+                    self.running = False
+                    print("Game Over!")  # Placeholder for game over sequence
+
+        for enemy in enemies_to_remove:
+            if enemy in self.enemies:
+                self.enemies.remove(enemy)
 
     def update(self) -> None:
-        self.player.update(self.screen)
+        if self.player:
+            self.player.update(self.screen)
         for enemy in self.enemies:
             enemy.update()
         for bullet in self.bullets:
@@ -84,7 +97,8 @@ class Game:
 
     def draw(self) -> None:
         self.screen.fill((0, 0, 0))  # Clear screen with black
-        self.player.draw(self.screen)
+        if self.player:
+            self.player.draw(self.screen)
         for enemy in self.enemies:
             enemy.draw(self.screen)
         for bullet in self.bullets:
@@ -97,10 +111,9 @@ class Game:
             if event.type == pygame.QUIT:
                 self.running = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE and self.player:
                     bullet = Bullet(Vector2(self.player.rect.centerx, self.player.rect.top))
                     self.bullets.append(bullet)
-                # Example additional key action
                 elif event.key == pygame.K_r:
                     self.__init__()  # Restart game by reinitializing
                     self.setup()

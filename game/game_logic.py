@@ -7,7 +7,9 @@ from configs.config import MAX_ENEMIES, SCREEN_WIDTH, SCREEN_HEIGHT, FPS
 from game.bullet import Bullet
 from game.enemy import Enemy
 from game.player import Player
-from game.toolbar import Toolbar  # Added import for Toolbar
+from game.toolbar import Toolbar
+from sounds.sound_effects import SoundEffects  # Added import for sound effects
+from music.background_music import BackgroundMusic  # Added import for background music
 
 
 class Game:
@@ -20,15 +22,21 @@ class Game:
         self.bullets: list[Bullet] = []
         self.running: bool = True
         self.last_enemy_spawn_time: float = time.time()
-        self.toolbar: Toolbar = Toolbar()  # Initialize toolbar
-        self.player_health: int = 5  # Initialize player health
-        self.score: int = 0  # Records the player's accumulated score
+        self.toolbar: Toolbar = Toolbar()
+        self.player_health: int = 5
+        self.score: int = 0
+        self.shake_intensity: int = 0  # Initialize shake intensity
+        self.sound_effects: SoundEffects = SoundEffects()  # Initialize sound effects
+        self.background_music: BackgroundMusic = BackgroundMusic()  # Initialize background music
 
     def setup(self) -> None:
         self.player = Player()
         self.spawn_enemies()
-        self.player_health = 5  # Reset health to start values
-        self.score = 0  # Reset score to start values
+        self.player_health = 5
+        self.score = 0
+        self.shake_intensity = 0
+        self.sound_effects.load_sounds()  # Load sound effects
+        self.background_music.play()  # Play background music
 
     def spawn_enemies(self) -> None:
         current_time = time.time()
@@ -45,11 +53,7 @@ class Game:
             self.draw()
             self.clock.tick(FPS)
             self.spawn_enemies()
-            self.toolbar.update(self.score, self.player_health)  # Update toolbar with live stats
-
-    def check_collisions(self) -> None:
-        self.check_bullet_collisions()
-        self.check_player_collisions()
+            self.toolbar.update(self.score, self.player_health)
 
     def check_bullet_collisions(self) -> None:
         bullets_to_remove = []
@@ -61,6 +65,7 @@ class Game:
                     enemies_to_remove.append(enemy)
                     bullets_to_remove.append(bullet)
                     self.score += 1
+                    self.sound_effects.play_collision_sound()  # Play collision sound
 
         for bullet in bullets_to_remove:
             if bullet in self.bullets:
@@ -77,9 +82,11 @@ class Game:
             if self.player and enemy.rect.colliderect(self.player.rect):
                 enemies_to_remove.append(enemy)
                 self.player_health -= 1
+                self.apply_screen_shake()  # Apply screen shake on collision
+                self.sound_effects.play_collision_sound()  # Play collision sound
                 if self.player_health <= 0:
                     self.running = False
-                    print("Game Over!")  # Placeholder for game over sequence
+                    self.display_game_over_popup()  # Display game over popup
 
         for enemy in enemies_to_remove:
             if enemy in self.enemies:
@@ -95,15 +102,17 @@ class Game:
             if bullet.rect().bottom < 0:
                 self.bullets.remove(bullet)
 
+        # Optionally update shake effect or intensity here
+
     def draw(self) -> None:
-        self.screen.fill((0, 0, 0))  # Clear screen with black
+        self.screen.fill((0, 0, 0))
         if self.player:
             self.player.draw(self.screen)
         for enemy in self.enemies:
             enemy.draw(self.screen)
         for bullet in self.bullets:
             bullet.draw(self.screen)
-        self.toolbar.draw(self.screen)  # Draw toolbar with current game stats
+        self.toolbar.draw(self.screen)
         pygame.display.flip()
 
     def handle_events(self) -> None:
@@ -114,9 +123,18 @@ class Game:
                 if event.key == pygame.K_SPACE and self.player:
                     bullet = Bullet(Vector2(self.player.rect.centerx, self.player.rect.top))
                     self.bullets.append(bullet)
+                    self.sound_effects.play_shooting_sound()  # Play bullet shooting sound
                 elif event.key == pygame.K_r:
-                    self.__init__()  # Restart game by reinitializing
+                    self.__init__()
                     self.setup()
+
+    def apply_screen_shake(self) -> None:
+        # Implementation of screen shake effect, adjusting screen coordinates temporarily
+        pass
+
+    def display_game_over_popup(self) -> None:
+        # Implementation to render a game over popup and manage music and sound accordingly
+        print("Game Over!")  # Placeholder for game over sequence
 
 
 if __name__ == "__main__":

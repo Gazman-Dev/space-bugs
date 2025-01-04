@@ -1,0 +1,46 @@
+import pygame
+import music_player/music_player.py
+import game/snake.py
+import game/food.py
+import configs/config.py
+
+- Purpose: Integrates music handling into the main game logic.
+- Class: Game
+  - Attributes:
+    - screen: Pygame display surface.
+    - clock: Controls game speed.
+    - font: For rendering text.
+    - snake: Instance of Snake.
+    - food: Instance of Food.
+    - score: Starts at 0.
+    - running: A state flag.
+    - music_player: Instance of MusicPlayer to manage game music.
+  - Methods:
+    - setup():
+      - setup toolbar with score
+      - food.update_position()
+      - register to keyboard events
+      - music_player.load_track('path/to/music/file')
+      - music_player.play(loop=True)
+    - game_loop():
+      - snake.grow()
+      - if snake collides with wall or itself
+        - music_player.stop()
+        - show_game_over()
+        - set running to false and return
+      - else if snake not collides with food
+        - snake.trim_tail()
+      - update_food_position()
+      - render()
+    - update_food_position():
+      - food.update_position()
+      - if food collides with snake
+        - move food to the nearest non-colliding position
+    - render():
+      - clear screen
+      - food.draw()
+      - snake.draw()
+      - manage any required scene transitions with music
+    - show_game_over():
+      - Displays game over screen.
+      - handle music transition if needed

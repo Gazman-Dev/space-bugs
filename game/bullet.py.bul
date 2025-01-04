@@ -1,26 +1,30 @@
-- Purpose: Represents bullet objects in the game, handling movement, collision detection, rendering, and identifying their location. Updates and renders bullets based on their position relative to the gameplay screen.
+- Purpose: Represents bullet objects in the game, handling movement, collision detection, rendering, and identifying their location. Integrates sound effects for bullet events, ensuring appropriate audio feedback during gameplay. 
 - Imports:
   - import pygame
   - from path.to.vector2_module import Vector2
+  - from path.to.sound_player import SoundPlayer
 - Definitions:
   - Classes:
     - Bullet: 
       - Attributes:
-        - position: Vector2 - starting  coordinates for the bullet.
+        - position: Vector2 - starting coordinates for the bullet.
         - speed: float - bullet speed value.
         - direction: Vector2 - direction vector for bullet movement.
         - radius: int - bullet's visual size on the screen.
         - color: tuple[int, int, int] - RGB color value of the bullet.
+        - sound_effect: SoundPlayer - instance to manage bullet-related sound effects.
       - Methods:
-        - __init__(position: Vector2, speed: float, direction: Vector2, radius: int = 5, color: tuple[int, int, int] = (255, 0, 0)):
-          - Initializes with position, speed, direction, radius, and color, configuring its attributes for circle representation.
+        - __init__(position: Vector2, speed: float, direction: Vector2, radius: int = 5, color: tuple[int, int, int] = (255, 0, 0), sound_effect: SoundPlayer):
+          - Initializes with position, speed, direction, radius, color, and sound effect, configuring attributes for circle representation. Prepares sound player for bullet events.
         - move():
-          - Updates position by applying speed and direction, adjusted for elapsed time.
+          - Updates position by applying speed and direction, adjusted for elapsed time. Plays movement sound effect if applicable.
         - update(surface: pygame.Surface):
-          - Updates position through move method, ensuring position stays within provided surface boundaries.
+          - Updates position through move method; triggers appropriate sounds and ensures position stays within surface boundaries.
         - draw(screen: pygame.Surface):
-          - Adjusts bullet position based on screen dimensions and draws it as a circle on the given screen using specified radius and color.
+          - Adjusts bullet position based on screen dimensions and draws it as a circle on the given screen using specified radius and color. Triggers drawing sound effect if necessary.
+        - play_shooting_sound():
+          - Triggers sound effect when a bullet is fired, enhancing gameplay immersion.
         - is_off_screen(screen_size: tuple[int, int]) -> bool:
-          - Checks if bullet's position is beyond given screen boundaries, indicating removal.
+          - Checks if bullet's position is beyond given screen boundaries, indicating removal, and potentially plays an out-of-bound sound.
         - rect() -> pygame.Rect:
           - Provides Rect object of bullet's position, calculated from position and radius, to denote location on screen.

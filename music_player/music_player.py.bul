@@ -1,0 +1,19 @@
+import pygame
+
+- Purpose: Manages background music playback, including play, pause, stop, and looping functionalities.
+- Class: MusicPlayer
+  - Attributes:
+    - current_track: string that holds the path of the current music track
+    - is_playing: boolean flag indicating if music is currently playing
+    - is_paused: boolean flag indicating if music is paused
+  - Methods:
+    - load_track(track_path: str):
+      - Loads and initializes the specified music track for playback.
+    - play(loop: bool = False):
+      - Plays the current track, optionally looping if loop is set to True.
+    - pause():
+      - Pauses music if it is currently playing.
+    - stop():
+      - Stops music playback and resets the track.
+    - resume():
+      - Resumes music if it was paused.

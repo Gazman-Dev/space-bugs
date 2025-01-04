@@ -22,10 +22,13 @@ class Game:
         self.last_enemy_spawn_time: float = time.time()
         self.toolbar: Toolbar = Toolbar()  # Initialize toolbar
         self.player_health: int = 5  # Initialize player health
+        self.score: int = 0  # Records the player's accumulated score
 
     def setup(self) -> None:
         self.player = Player()
         self.spawn_enemies()
+        self.player_health = 5  # Reset health to start values
+        self.score = 0  # Reset score to start values
 
     def spawn_enemies(self) -> None:
         current_time = time.time()
@@ -42,7 +45,7 @@ class Game:
             self.draw()
             self.clock.tick(FPS)
             self.spawn_enemies()
-            self.toolbar.update(self.player_health, self.player.score)  # Update toolbar with live stats
+            self.toolbar.update(self.player_health, self.score)  # Update toolbar with live stats
 
     def check_collisions(self) -> None:
         bullets_to_remove = []
@@ -54,7 +57,7 @@ class Game:
                     enemies_to_remove.append(enemy)
                     bullets_to_remove.append(bullet)
                     # Increase score on hitting an enemy
-                    self.player.score += enemy.value
+                    self.score += enemy.value
 
         # Remove bullets and enemies after iteration to avoid modifying the list during iteration
         for bullet in bullets_to_remove:

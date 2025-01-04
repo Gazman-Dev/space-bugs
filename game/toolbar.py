@@ -1,10 +1,13 @@
 import pygame
 
+
 class Toolbar:
     def __init__(self):
         self.font = pygame.font.Font(pygame.font.get_default_font(), 20)
         self.score_position = pygame.Vector2(10, 10)  # Default position for displaying score
         self.health_position = pygame.Vector2(10, 40)  # Default position for displaying health
+        self.current_score = -1
+        self.current_health = -1
 
     def update(self, score: int, health: int):
         # This would typically update internal state if needed

@@ -15,7 +15,7 @@ class Game:
         pygame.init()
         self.screen: pygame.Surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock: pygame.time.Clock = pygame.time.Clock()
-        self.player: Player = None
+        self.player: Player | None = None
         self.enemies: list[Enemy] = []
         self.bullets: list[Bullet] = []
         self.running: bool = True
@@ -45,7 +45,7 @@ class Game:
             self.draw()
             self.clock.tick(FPS)
             self.spawn_enemies()
-            self.toolbar.update(self.player_health, self.score)  # Update toolbar with live stats
+            self.toolbar.update(self.score, self.player_health)  # Update toolbar with live stats
 
     def check_collisions(self) -> None:
         bullets_to_remove = []
@@ -57,7 +57,7 @@ class Game:
                     enemies_to_remove.append(enemy)
                     bullets_to_remove.append(bullet)
                     # Increase score on hitting an enemy
-                    self.score += enemy.value
+                    self.score += 1
 
         # Remove bullets and enemies after iteration to avoid modifying the list during iteration
         for bullet in bullets_to_remove:

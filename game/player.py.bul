@@ -4,7 +4,7 @@
   - import pygame
   - import configs.config as config
   - import pygame.math.Vector2
-  - import assets_loader
+  - import assets_loader 
 
 - Definitions:
   - Classes:

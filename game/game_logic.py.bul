@@ -1,6 +1,6 @@
-- Purpose: Implements the main game loop while directly managing player health and score. Integrates game logic to handle collision detection, events, and score updates, ensuring responsive gameplay interactions.
+- Purpose: Implements the main game loop while directly managing player health and score. Integrates game logic to handle collision detection, events, and score updates, ensuring responsive gameplay interactions. Enhancements include player collision animations and a game over popup.
 
-- Imports: 
+- Imports:
   - import pygame
   - from configs.config import MAX_ENEMIES
   - from game.player import Player
@@ -25,10 +25,11 @@
         - toolbar: Toolbar - Interface component for displaying player health and score.
         - player_health: int - Tracks the player's current health, starting at 5.
         - score: int - Records the player's accumulated score.
+        - shake_intensity: int - Level of screen shake intensity applied during player collision.
     
       - Methods:
         - setup() -> None:
-          - Initialize core game components, including the player, screen settings, enemies, bullets, and toolbar. Reset health and score to initial values.
+          - Initialize core game components, including the player, screen settings, enemies, bullets, and toolbar. Reset health and score to initial values. Configure initial shake intensity.
 
         - spawn_enemies() -> None:
           - Spawn new enemies based on elapsed time and current enemy count. Manage spawn timing and add to the enemy list.
@@ -40,7 +41,7 @@
           - Traverse through active bullets and check them against enemies for collisions. Upon collision, remove both the bullet and enemy from the game and increment the player's score.
 
         - check_player_collisions() -> None:
-          - Loop through enemies to ensure none collide with the player. On a collision occurrence, remove the enemy, decrement the player's health, and assess if the game should end if the player's health depletes.
+          - Loop through enemies to ensure none collide with the player. On a collision occurrence, invoke screen shake effect, remove the enemy, decrement the player's health, and assess if the game should end if the player's health depletes.
 
         - update() -> None:
           - Update positions of player, enemies, and bullets with boundary checks. Reflect changes in health and score with corresponding toolbar updates.
@@ -50,3 +51,9 @@
 
         - handle_events() -> None:
           - Process user inputs and system events. Interpret controls for player actions like bullet firing, and handle game pause, exit, or restart commands.
+
+        - apply_screen_shake() -> None:
+          - Implement a shake effect by briefly adjusting the screen position when a collision is detected, enhancing the player feedback on impact.
+
+        - display_game_over_popup() -> None:
+          - Render a game over popup on the screen, offering options to either restart the game or exit, while ensuring the game state reflects the player's end.

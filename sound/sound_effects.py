@@ -1,5 +1,7 @@
-import pygame
 import os
+
+import pygame
+
 
 class SoundManager:
     def __init__(self, sound_directory: str):
@@ -25,4 +27,3 @@ class SoundManager:
 # sound_manager = SoundManager("path/to/sounds")
 # sound_manager.load_sound_effects(["shoot.wav", "explode.wav"])
 # sound_manager.play_sound("shoot.wav")
-```

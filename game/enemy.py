@@ -15,28 +15,6 @@ class Enemy:
         self.rect: pygame.Rect = pygame.Rect(self.position.x, self.position.y, self.size.x, self.size.y)
         self.path: list[Vector2] = self.generate_random_path()
         self.current_target_index: int = 0
-        self.sound_effects = self.load_sound_effects()  # Load sound effects
-        Enemy.initialize_audio()
-        Enemy.play_background_music()
-        
-    @staticmethod
-    def initialize_audio() -> None:
-        pygame.mixer.init()
-        Enemy.background_music = pygame.mixer.Sound('assets/background_music.ogg')
-        Enemy.sound_effects = {
-            "move": pygame.mixer.Sound('assets/move_sound.ogg'),
-            "collision": pygame.mixer.Sound('assets/collision_sound.ogg')
-        }
-
-    def load_sound_effects(self) -> dict:
-        return {
-            "move": pygame.mixer.Sound('assets/move_sound.ogg'),
-            "collision": pygame.mixer.Sound('assets/collision_sound.ogg')
-        }
-
-    @staticmethod
-    def play_background_music() -> None:
-        Enemy.background_music.play(loops=-1)
 
     def generate_random_path(self) -> list[Vector2]:
         path = []
@@ -61,7 +39,6 @@ class Enemy:
             if vector_to_target.length() < travel_vector.length():
                 self.position = target
                 self.current_target_index = (self.current_target_index + 1) % len(self.path)
-                self.play_sound_effect("move")
             else:
                 self.position += travel_vector
 
@@ -71,10 +48,7 @@ class Enemy:
         surface.blit(self.image, self.position)
 
     def check_collision(self, obj: pygame.Rect) -> bool:
-        collision = self.rect.colliderect(obj)
-        if collision:
-            self.play_sound_effect("collision")
-        return collision
+        return self.rect.colliderect(obj)
 
     def update(self) -> None:
         self.move()
@@ -82,7 +56,3 @@ class Enemy:
 
     def render(self, screen: pygame.Surface) -> None:
         self.draw(screen)
-
-    def play_sound_effect(self, effect_name: str) -> None:
-        if effect_name in self.sound_effects:
-            self.sound_effects[effect_name].play()

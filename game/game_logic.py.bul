@@ -10,7 +10,7 @@
   - import random
   - import time
   - from game.toolbar import Toolbar
-  - from sounds.sound_effects import SoundEffects
+  - import sounds.sound_effects
   - from music.background_music import BackgroundMusic
 
 - Definitions:
@@ -28,8 +28,7 @@
         - player_health: int - Tracks the player's current health, starting at 5.
         - score: int - Records the player's accumulated score.
         - shake_intensity: int - Level of screen shake intensity applied during player collision.
-        - sound_effects: SoundEffects - Module for managing and playing sound effects.
-        - background_music: BackgroundMusic - Module for controlling background music playback.
+        - background_music: MusicPlayer - Module for controlling background music playback.
     
       - Methods:
         - setup() -> None:
@@ -39,7 +38,7 @@
           - Spawn new enemies based on elapsed time and current enemy count. Manage spawn timing and add to the enemy list.
 
         - game_loop() -> None:
-          - Run the main game loop while `running` is true. Handle user inputs, update game elements, check for collisions, refresh screen, and manage enemy spawns. Regulate score and health, handle background music, and prompt sound effects for actions.
+          - Run the main game loop while `running` is true. Handle user inputs, update game elements, check for collisions, refresh screen, and manage enemy spawns. Regulate score and health, and prompt sound effects for actions.
 
         - check_bullet_collisions() -> None:
           - Traverse through active bullets and check them against enemies for collisions. Upon collision, remove both the bullet and enemy from the game, play relevant sound effect, and increment the player's score.

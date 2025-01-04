@@ -44,4 +44,4 @@ class MusicPlayer:
             pygame.mixer.music.unpause()
             self.is_playing = True
             self.is_paused = False
-```
+

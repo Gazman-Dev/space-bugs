@@ -4,14 +4,10 @@
   - import pygame
   - from pygame.math import Vector2
   - from configs.config import ENEMY_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
-  - from utils.assets_loader import load_enemy_asset, load_sound_effect, load_background_music
+  - from utils.assets_loader import load_enemy_asset
   - import random
 
-- Definitions: 
-  - Attributes:
-    - sound_effects: Dict[str, pygame.mixer.Sound] - Dictionary holding various sound effects, pre-loaded for quick access.
-    - background_music: pygame.mixer.Sound - Sound object for handling continuous background music playback.
-  
+- Definitions:
   - Classes:
     - Enemy:
       - Attributes:
@@ -25,24 +21,14 @@
         - current_target_index: int - Index of the current target coordinate from the path to achieve incremental movement.
       - Methods:
         - __init__(position: Vector2) -> None:
-          - Initialize an enemy at a given position, set speed from configuration, generate a closed random path within boundaries with each point distanced appropriately, and set the first path point as the initial target. Load and scale enemy image, and set up rect for collision management. Load necessary sound effects for enemy actions.
+          - Initialize an enemy at a given position, set speed from configuration, generate a closed random path within boundaries with each point distanced appropriately, and set the first path point as the initial target. Load and scale enemy image, and set up rect for collision management.
         - move() -> None:
-          - Calculate the vector between the current position and the target path coordinate. Normalize this vector to get the movement direction if not zero. Calculate the travel vector by scaling the direction with the enemy's speed. If the travel vector is shorter than needed to reach the target, increment the position by it. Otherwise, compute any excess using remaining travel distance beyond target, update position, and move to next path segment, eventually looping back if reaching the end. Play movement-related sound effect if applicable.
+          - Calculate the vector between the current position and the target path coordinate. Normalize this vector to get the movement direction if not already zero. Calculate the travel vector by scaling the direction with the enemy's speed. If the travel vector is shorter than needed to reach the target, increment the position by it. Otherwise, compute any excess using remaining travel distance beyond target, update position, and move to next path segment, eventually looping back if reaching the end.
         - draw(screen: pygame.Surface) -> None:
           - Draw the enemy on the screen using its image at the current position for visual representation.
         - check_collision(obj: pygame.Rect) -> bool:
-          - Determine collision with another object by checking overlap of rectangles defined by their rects. Trigger collision sound effect if collision occurs.
+          - Determine collision with another object by checking overlap of rects.
         - update(screen: pygame.Surface) -> None:
-          - Refresh enemy state with movement execution, path cycling, updating rect positions. Coordinate sound effects with relevant actions.
+          - Refresh enemy state with movement execution, path cycling, updating rect positions.
         - generate_random_path() -> None:
           - Construct a closed path of up to 8 random Vector2 coordinates, ensuring each is within screen limits and a predefined minimum distance from others, to create a seamless movement cycle.
-    
-  - Methods:
-    - initialize_audio() -> None:
-      - Set up pygame mixer, load background music, and sound effects for game events. Ensure proper volume settings.
-    - play_background_music() -> None:
-      - Start playback of the background music on loop to maintain constant ambient sound during gameplay.
-    - stop_background_music() -> None:
-      - Halt the background music for game scenes where silence or a different audio track is required.
-    - play_sound_effect(effect_name: str) -> None:
-      - Execute playback of a specific sound effect based on game events like shooting, hitting enemies, or special interactions by using pre-loaded sound effects dictionary.

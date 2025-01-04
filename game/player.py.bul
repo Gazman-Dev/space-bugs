@@ -5,8 +5,6 @@
   - import configs.config as config
   - import pygame.math.Vector2
   - import assets_loader
-  - import sound_effects
-  - import music_player
 
 - Definitions:
   - Classes:
@@ -18,18 +16,13 @@
         - player_image: pygame.Surface - Visual asset for the player ship, obtained via assets_loader.
         - size: pygame.math.Vector2 - Represents player ship size proportionally, adapting to screen dimensions from config.
         - rect: pygame.Rect - Defines rectangular boundary based on current position and size of the player ship for collision detection.
-        - sound_effects: sound_effects.SoundEffects - Manages audio effects triggered by player actions.
-        - music_player: music_player.MusicPlayer - Controls background music during gameplay.
+
       - Methods:
         - move(self, direction: pygame.math.Vector2) -> None:
-          - Updates player position by applying speed to direction vector for seamless movement with Vector2 math. Adjusts according to screen size for proportional navigation. Play movement sound effect if available.
+          - Updates player position by applying speed to direction vector for seamless movement with Vector2 math. Adjusts according to screen size for proportional navigation.
         - draw(self, screen: pygame.Surface) -> None:
           - Renders player ship image on the provided screen surface; ensures central alignment with current position and scales image to appropriate size. Positioning relates to the screen ensuring all game elements are proportionately displayed.
         - update(self, screen: pygame.Surface) -> None:
-          - Incorporates movement and cycle adjustments for real-time gameplay. Adjusts position using input direction and ensures position updates based on the screen's size. Initiates sound effects for certain animations or actions.
+          - Incorporates movement and cycle adjustments for real-time gameplay. Adjusts position using input direction and ensures position updates based on the screen's size.
         - update_rect(self) -> None:
           - Refreshes the player's rect attribute, aligning it with the current position and size, enabling precise collision detection and screen boundary handling.
-        - play_sound_effect(self, effect_name: str) -> None:
-          - Triggers the specified sound effect using the sound_effects module based on the player's actions (e.g., shooting, damage).
-        - manage_music(self) -> None:
-          - Handles the background music using the music_player module to ensure an appropriate auditory environment during gameplay transitions.

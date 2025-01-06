@@ -134,9 +134,3 @@ class Game:
 
     def display_game_over_popup(self) -> None:
         print("Game Over!")
-
-if __name__ == "__main__":
-    game = Game()
-    game.setup()
-    game.game_loop()
-    pygame.quit()

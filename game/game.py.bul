@@ -14,11 +14,6 @@
   - from game.popup import GameOverPopup
 
 - Definitions:
-  - Attributes: 
-    - BGM_SOUND: str - Background music sound constant.
-    - EXPLOSION_SOUND: str - Explosion sound effect constant.
-    - SHOOT_SOUND: str - Shooting sound effect constant.
-
   - Classes:
     - Game:
       - Attributes:

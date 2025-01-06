@@ -16,4 +16,4 @@ import configs/config.py
     - draw():
       - If visibility is True:
         - Render the instructions message.
-        - Display "Press 'Esc' to exit or 'E' to reset." on the screen, centered.
+        - Display "Close to exit or 'R' to reset." on the screen, centered.

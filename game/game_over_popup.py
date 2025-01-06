@@ -1,11 +1,11 @@
 import pygame
-from configs.config import *  # Assuming there is a config file with necessary configurations
+
 
 class GameOverPopup:
-    def __init__(self, screen: pygame.Surface, font: pygame.font.Font, message: str):
+    def __init__(self, screen: pygame.Surface):
         self.screen = screen
-        self.font = font
-        self.message = message
+        self.font = pygame.font.Font(pygame.font.get_default_font(), 20)
+        self.message = "Game over, the end"
         self.is_visible = False
 
     def show(self) -> None:
@@ -24,4 +24,3 @@ class GameOverPopup:
             
             self.screen.blit(message_surface, message_rect)
             self.screen.blit(instructions_surface, instructions_rect)
-```

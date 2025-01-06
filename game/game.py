@@ -7,10 +7,10 @@ from pygame.math import Vector2
 from configs.config import MAX_ENEMIES, SCREEN_WIDTH, SCREEN_HEIGHT, FPS
 from game.bullet import Bullet
 from game.enemy import Enemy
+from game.game_over_popup import GameOverPopup
 from game.player import Player
 from game.toolbar import Toolbar
 from game.utils.sound_manager import SoundManager
-from game.popup import GameOverPopup
 
 
 class Game:
@@ -28,7 +28,7 @@ class Game:
         self.score: int = 0
         self.shake_intensity: int = 0
         self.sound_manager: SoundManager = sound_manager
-        self.game_over_popup: GameOverPopup = GameOverPopup()
+        self.game_over_popup: GameOverPopup = GameOverPopup(self.screen)
 
     def setup(self) -> None:
         self.player = Player(self.sound_manager)
@@ -48,7 +48,8 @@ class Game:
     def game_loop(self) -> None:
         while self.running:
             self.handle_events()
-            self.update()
+            if not self.game_over_popup.is_visible:
+                self.update()
             self.check_collisions()
             self.draw()
             self.clock.tick(FPS)
@@ -89,9 +90,8 @@ class Game:
                 enemies_to_remove.append(enemy)
                 self.player_health -= 1
                 self.apply_screen_shake()
-                self.sound_manager.play_sound(SoundManager.EXPLOSION_SOUND)
+                self.sound_manager.play_sound(SoundManager.GAME_OVER)
                 if self.player_health <= 0:
-                    self.running = False
                     self.display_game_over_popup()
 
         for enemy in enemies_to_remove:
@@ -117,12 +117,15 @@ class Game:
         for bullet in self.bullets:
             bullet.draw(self.screen)
         self.toolbar.draw()
+        self.game_over_popup.draw()
         pygame.display.flip()
 
     def handle_events(self) -> None:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+            elif event.type == pygame.K_r:
+                self.reset_game()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and self.player:
                     bullet = Bullet(Vector2(self.player.rect.centerx, self.player.rect.top),
@@ -137,5 +140,9 @@ class Game:
         pass
 
     def display_game_over_popup(self) -> None:
-        print("Game Over!")
-        # Logic to display game over popup
+        self.game_over_popup.is_visible = True
+
+    def reset_game(self):
+        self.game_over_popup.is_visible = False
+        self.player_health = 5
+        self.score = 0

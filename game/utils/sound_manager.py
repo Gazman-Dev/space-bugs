@@ -28,4 +28,5 @@ class SoundManager:
         """Play a sound by name. Loop indefinitely if loop is True, else play once."""
         sound = self.loaded_sounds[sound_name]
         loops = -1 if loop else 0
+        sound.stop()
         sound.play(loops=loops)

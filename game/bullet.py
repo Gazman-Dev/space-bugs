@@ -27,14 +27,14 @@ class Bullet:
 
     def play_shooting_sound(self):
         if self.sound_manager:
-            self.sound_manager.play()  # Uses sound_manager to play the shooting sound
+            self.sound_manager.play_sound(SoundManager.SHOOT_SOUND)
 
     def is_off_screen(self, screen_size: tuple[int, int]) -> bool:
         x, y = self.position
         width, height = screen_size
         off_screen = x < 0 or x > width or y < 0 or y > height
-        if off_screen and self.sound_manager:
-            self.sound_manager.play()  # Uses sound_manager to play an out-of-bound sound
+        # if off_screen:
+        #     self.sound_manager.play_sound(SoundManager.OUT_OF_BOUNCE)
         return off_screen
 
     def rect(self) -> pygame.Rect:

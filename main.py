@@ -1,6 +1,6 @@
 import pygame
 
-from game.game_logic import Game
+from game import Game
 from sound.sound_manager import SoundManager
 
 def main() -> None:

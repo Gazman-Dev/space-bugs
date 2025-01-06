@@ -11,7 +11,6 @@
   - import time
   - from game.toolbar import Toolbar
   - from sounds.sound_manager import SoundManager
-  - from music.background_music import BackgroundMusic
 
 - Definitions:
   - Classes:
@@ -28,12 +27,11 @@
         - player_health: int - Tracks the player's current health, starting at 5.
         - score: int - Records the player's accumulated score.
         - shake_intensity: int - Level of screen shake intensity applied during player collision.
-        - background_music: BackgroundMusic - Module for controlling background music playback.
-        - sound_manager: SoundManager - Manages sound effects playback in-game.
+        - sound_manager: SoundManager - Instance for managing and playing sound effects.
 
       - Methods:
         - setup() -> None:
-          - Initialize core game components, including the player, screen settings, enemies, bullets, and toolbar. Reset health and score to initial values. Configure initial shake intensity. Load sound effects using SoundManager and start background music with `BGM_SOUND`.
+          - Initialize core game components, including the player, screen settings, enemies, bullets, and toolbar. Reset health and score to initial values. Configure initial shake intensity. Start background music with `BGM_SOUND`.
 
         - spawn_enemies() -> None:
           - Spawn new enemies depending on elapsed time and current enemy count. Update enemy list with newly spawned enemies based on timing.

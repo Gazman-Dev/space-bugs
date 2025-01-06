@@ -32,9 +32,6 @@
         - draw(screen: pygame.Surface) -> None:
           - Draw the enemy on the screen using its image at the current position for visual representation.
 
-        - check_collision(obj: pygame.Rect) -> bool:
-          - Determine collision with another object by checking overlap of rects. If collision detected, use the sound manager to play the EXPLOSION_SOUND effect.
-
         - update(screen: pygame.Surface) -> None:
           - Refresh enemy state by executing movement, cycling through paths, and updating rect positions accordingly.
 

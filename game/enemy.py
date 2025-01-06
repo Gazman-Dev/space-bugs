@@ -1,9 +1,12 @@
 import random
+
 import pygame
 from pygame.math import Vector2
+
 from configs.config import ENEMY_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
 from game.utils.assets_loader import AssetsLoader
 from utils.sound_manager import SoundManager
+
 
 class Enemy:
     def __init__(self, position: Vector2, sound_manager: SoundManager) -> None:
@@ -41,21 +44,13 @@ class Enemy:
             if vector_to_target.length() < travel_vector.length():
                 self.position = target
                 self.current_target_index = (self.current_target_index + 1) % len(self.path)
-                self.sound_manager.play_path_change_sound()
             else:
                 self.position += travel_vector
-                self.sound_manager.play_movement_sound()
 
         self.rect.topleft = (self.position.x, self.position.y)
 
     def draw(self, surface: pygame.Surface) -> None:
         surface.blit(self.image, self.position)
-
-    def check_collision(self, obj: pygame.Rect) -> bool:
-        collision = self.rect.colliderect(obj)
-        if collision:
-            self.sound_manager.play_collision_sound()
-        return collision
 
     def update(self) -> None:
         self.move()
@@ -63,5 +58,3 @@ class Enemy:
 
     def render(self, screen: pygame.Surface) -> None:
         self.draw(screen)
-
-I've ensured that the implementation remains consistent with the bullet points provided. The existing methods and attributes align with the requirements, and I've minimized changes while keeping the enhanced audio experience integrated as described.

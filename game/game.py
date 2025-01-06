@@ -1,6 +1,7 @@
-import pygame
 import random
 import time
+
+import pygame
 from pygame.math import Vector2
 
 from configs.config import MAX_ENEMIES, SCREEN_WIDTH, SCREEN_HEIGHT, FPS
@@ -8,8 +9,8 @@ from game.bullet import Bullet
 from game.enemy import Enemy
 from game.player import Player
 from game.toolbar import Toolbar
-from sounds.sound_manager import SoundManager
-from music.background_music import BackgroundMusic
+from game.utils.sound_manager import SoundManager
+
 
 class Game:
     def __init__(self) -> None:
@@ -26,7 +27,6 @@ class Game:
         self.score: int = 0
         self.shake_intensity: int = 0
         self.sound_manager: SoundManager = SoundManager()
-        self.background_music: BackgroundMusic = BackgroundMusic()
 
     def setup(self) -> None:
         self.player = Player()
@@ -34,8 +34,7 @@ class Game:
         self.player_health = 5
         self.score = 0
         self.shake_intensity = 0
-        self.sound_manager.load_sounds()
-        self.background_music.play()
+        self.sound_manager.play_sound(SoundManager.BGM_SOUND)
 
     def spawn_enemies(self) -> None:
         current_time = time.time()

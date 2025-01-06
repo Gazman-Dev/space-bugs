@@ -3,6 +3,7 @@ import pygame
 from game.game import Game
 from game.utils.sound_manager import SoundManager
 
+
 def main() -> None:
     # Initialize pygame
     pygame.init()
@@ -13,7 +14,7 @@ def main() -> None:
     sound_manager.load_sounds()
     
     # Create a Game instance
-    game_instance = Game()
+    game_instance = Game(sound_manager)
 
     # Call the setup function of Game instance
     game_instance.setup()

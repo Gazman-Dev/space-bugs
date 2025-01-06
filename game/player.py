@@ -7,14 +7,14 @@ from game.utils.sound_manager import SoundManager
 
 
 class Player:
-    def __init__(self):
+    def __init__(self, sound_manager):
         self.position: Vector2 = Vector2(config.SCREEN_WIDTH / 2, config.SCREEN_HEIGHT / 2)
         self.speed: float = config.PLAYER_SPEED
         self.direction: Vector2 = Vector2(0, 0)
         self.player_image: pygame.Surface = AssetsLoader.load_player_image()
         self.size: Vector2 = Vector2(config.PLAYER_SIZE[0], config.PLAYER_SIZE[1])
         self.rect: pygame.Rect = pygame.Rect(self.position.x, self.position.y, self.size.x, self.size.y)
-        self.sound_manager: SoundManager = SoundManager()
+        self.sound_manager: SoundManager = sound_manager
 
     def move(self, direction: Vector2) -> None:
         self.direction = direction

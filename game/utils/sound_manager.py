@@ -2,17 +2,19 @@ import pygame
 
 
 class SoundManager:
-    MOVE_SOUND: str = "sounds/move.wav"
-    SHOOT_SOUND: str = "sounds/shoot.wav"
+    MOVE_SOUND: str = "sounds/move.mp3"
+    SHOOT_SOUND: str = "sounds/shoot.mp3"
     BGM_SOUND: str = "sounds/bgm.mp3"
-    EXPLOSION_SOUND: str = "sounds/explosion.wav"
+    EXPLOSION_SOUND: str = "sounds/explosion.mp3"
+    GAME_OVER: str = "sounds/game_over.mp3"
 
     def __init__(self):
         self.sound_files = [
             SoundManager.MOVE_SOUND,
             SoundManager.SHOOT_SOUND,
             SoundManager.BGM_SOUND,
-            SoundManager.EXPLOSION_SOUND
+            SoundManager.EXPLOSION_SOUND,
+            SoundManager.GAME_OVER
         ]
         self.loaded_sounds = {}
 

@@ -4,9 +4,9 @@ from game.utils.sound_manager import SoundManager
 
 
 class Toolbar:
-    def __init__(self, screen: pygame.Surface, font: pygame.font.Font, sound_manager: SoundManager):
+    def __init__(self, screen: pygame.Surface, sound_manager: SoundManager):
         self.screen = screen
-        self.font = font
+        self.font = pygame.font.Font(pygame.font.get_default_font(), 20)
         self.score_position = pygame.Vector2(10, 10)  # Default position for displaying score
         self.health_position = pygame.Vector2(10, 40)  # Default position for displaying health
         self.current_score = -1

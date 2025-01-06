@@ -13,7 +13,7 @@ from game.utils.sound_manager import SoundManager
 
 
 class Game:
-    def __init__(self) -> None:
+    def __init__(self, sound_manager) -> None:
         pygame.init()
         self.screen: pygame.Surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock: pygame.time.Clock = pygame.time.Clock()
@@ -22,14 +22,14 @@ class Game:
         self.bullets: list[Bullet] = []
         self.running: bool = True
         self.last_enemy_spawn_time: float = time.time()
-        self.toolbar: Toolbar = Toolbar()
+        self.toolbar: Toolbar = Toolbar(screen=self.screen, sound_manager=sound_manager)
         self.player_health: int = 5
         self.score: int = 0
         self.shake_intensity: int = 0
-        self.sound_manager: SoundManager = SoundManager()
+        self.sound_manager: SoundManager = sound_manager
 
     def setup(self) -> None:
-        self.player = Player()
+        self.player = Player(self.sound_manager)
         self.spawn_enemies()
         self.player_health = 5
         self.score = 0
@@ -39,7 +39,7 @@ class Game:
     def spawn_enemies(self) -> None:
         current_time = time.time()
         if len(self.enemies) < MAX_ENEMIES and (current_time - self.last_enemy_spawn_time) > 2:
-            enemy = Enemy(Vector2(random.randint(0, SCREEN_WIDTH - 50), 50))
+            enemy = Enemy(Vector2(random.randint(0, SCREEN_WIDTH - 50), 50), self.sound_manager)
             self.enemies.append(enemy)
             self.last_enemy_spawn_time = current_time
 
@@ -67,7 +67,7 @@ class Game:
                     enemies_to_remove.append(enemy)
                     bullets_to_remove.append(bullet)
                     self.score += 1
-                    self.sound_manager.play_collision_sound()
+                    self.sound_manager.play_sound(SoundManager.EXPLOSION_SOUND)
 
         for bullet in bullets_to_remove:
             if bullet in self.bullets:
@@ -85,7 +85,7 @@ class Game:
                 enemies_to_remove.append(enemy)
                 self.player_health -= 1
                 self.apply_screen_shake()
-                self.sound_manager.play_collision_sound()
+                self.sound_manager.play_sound(SoundManager.GAME_OVER)
                 if self.player_health <= 0:
                     self.running = False
                     self.display_game_over_popup()
@@ -112,7 +112,7 @@ class Game:
             enemy.draw(self.screen)
         for bullet in self.bullets:
             bullet.draw(self.screen)
-        self.toolbar.draw(self.screen)
+        self.toolbar.draw()
         pygame.display.flip()
 
     def handle_events(self) -> None:
@@ -121,9 +121,10 @@ class Game:
                 self.running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and self.player:
-                    bullet = Bullet(Vector2(self.player.rect.centerx, self.player.rect.top))
+                    bullet = Bullet(Vector2(self.player.rect.centerx, self.player.rect.top),
+                                    sound_manager=self.sound_manager)
                     self.bullets.append(bullet)
-                    self.sound_manager.play_shooting_sound()
+                    self.sound_manager.play_sound(SoundManager.SHOOT_SOUND)
                 elif event.key == pygame.K_r:
                     self.__init__()
                     self.setup()

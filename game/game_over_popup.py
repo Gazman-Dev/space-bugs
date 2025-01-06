@@ -17,7 +17,7 @@ class GameOverPopup:
     def draw(self) -> None:
         if self.is_visible:
             message_surface = self.font.render(self.message, True, (255, 255, 255))
-            instructions_surface = self.font.render("Press 'Esc' to exit or 'E' to reset.", True, (255, 255, 255))
+            instructions_surface = self.font.render("Press 'Esc' to exit or 'R' to reset.", True, (255, 255, 255))
             screen_rect = self.screen.get_rect()
             message_rect = message_surface.get_rect(center=(screen_rect.centerx, screen_rect.centery - 20))
             instructions_rect = instructions_surface.get_rect(center=(screen_rect.centerx, screen_rect.centery + 20))

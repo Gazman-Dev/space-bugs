@@ -23,8 +23,8 @@
         - draw(screen: pygame.Surface):
           - Draws the bullet as a circle at the current position on the screen with the specified radius and color.
         - play_shooting_sound():
-          - Uses sound_manager to play the shooting sound when a bullet is fired.
+          - Uses sound_manager to play the shooting sound using the SHOOT_SOUND constant when a bullet is fired.
         - is_off_screen(screen_size: tuple[int, int]) -> bool:
-          - Checks if the bullet's position has exceeded the screen boundaries; uses sound_manager to play an out-of-bound sound if so.
+          - Checks if the bullet's position has exceeded the screen boundaries; uses sound_manager to play the EXPLOSION_SOUND constant for an out-of-bound sound if so.
         - rect() -> pygame.Rect:
           - Produces a Rect object based on the bullet's position and radius to identify the bullet's area on the screen.

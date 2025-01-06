@@ -21,12 +21,12 @@
 
       - Methods:
         - move(self, direction: pygame.math.Vector2) -> None:
-          - Updates player position by applying speed to direction vector for seamless movement with Vector2 math. Adjusts according to screen size for proportional navigation. Optionally plays movement sound for auditory feedback.
+          - Updates player position by applying the speed to the direction vector for seamless movement with Vector2 math. Adjusts according to screen size for proportional navigation. Plays the movement sound using the MOVE_SOUND constant from SoundManager for auditory feedback.
         - draw(self, screen: pygame.Surface) -> None:
-          - Renders player ship image on the provided screen surface; ensures central alignment with current position and scales image to appropriate size. Positioning relates to the screen ensuring all game elements are proportionately displayed.
+          - Renders the player ship image on the provided screen surface; ensures central alignment with current position and scales the image to the appropriate size. Positioning relates to the screen ensuring all game elements are proportionately displayed.
         - update(self, screen: pygame.Surface) -> None:
-          - Incorporates movement and cycle adjustments for real-time gameplay. Adjusts position using input direction and ensures position updates based on the screen's size. Plays update-related sounds through sound_manager as necessary.
+          - Incorporates movement and cycle adjustments for real-time gameplay. Adjusts position using input direction and ensures position updates based on the screen's size. Plays update-related sounds utilizing the SoundManager as necessary.
         - update_rect(self) -> None:
           - Refreshes the player's rect attribute, aligning it with the current position and size, enabling precise collision detection and screen boundary handling.
         - play_sound(self, sound_name: str, loop: bool = False) -> None:
-          - Utilizes the sound_manager to trigger a specific sound effect associated with a player's action. Plays the sound name provided and loops if specified.
+          - Utilizes the sound_manager to trigger a specific sound effect associated with a player's action by referencing sound constants like MOVE_SOUND. Plays the sound name provided and loops if specified.

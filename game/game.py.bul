@@ -33,19 +33,19 @@
 
       - Methods:
         - setup() -> None:
-          - Initialize core game components, including the player, screen settings, enemies, bullets, and toolbar. Reset health and score to initial values. Configure initial shake intensity. Load sound effects using SoundManager and start background music.
+          - Initialize core game components, including the player, screen settings, enemies, bullets, and toolbar. Reset health and score to initial values. Configure initial shake intensity. Load sound effects using SoundManager and start background music with `BGM_SOUND`.
 
         - spawn_enemies() -> None:
           - Spawn new enemies depending on elapsed time and current enemy count. Update enemy list with newly spawned enemies based on timing.
 
         - game_loop() -> None:
-          - Continuously run the game loop while `running` is true. Handle inputs, update all game objects, detect collisions, refresh display, manage enemy spawning, and update score and health. Trigger sound effects through SoundManager as needed.
+          - Continuously run the game loop while `running` is true. Handle inputs, update all game objects, detect collisions, refresh display, manage enemy spawning, and update score and health. Trigger sound effects using sound constants from SoundManager as needed (e.g., `EXPLOSION_SOUND` for enemy destruction).
 
         - check_bullet_collisions() -> None:
-          - Check active bullets for enemy collisions. On a hit, both bullet and enemy are removed, score is incremented, and play a collision sound via SoundManager.
+          - Check active bullets for enemy collisions. On a hit, remove the bullet and enemy, increment score, and play an explosion sound using `EXPLOSION_SOUND`.
 
         - check_player_collisions() -> None:
-          - Verify if any enemy collides with the player. On collision, apply screen shake, remove enemy, decrease health, invoke collision sound using SoundManager, and handle game end if health depletes.
+          - Verify if any enemy collides with the player. On collision, apply screen shake, remove enemy, decrease health, play collision sound using `EXPLOSION_SOUND`, and handle game end if health depletes.
 
         - update() -> None:
           - Update player, enemies, and bullets positions with boundary checks. Reflect health and score changes in the toolbar. Ensure sound effects are played through SoundManager for actions occurring on-screen.
@@ -54,7 +54,7 @@
           - Clear the display and redraw all game entities, including player, enemies, and bullets. Use toolbar to show updated health and score.
 
         - handle_events() -> None:
-          - Manage player input and system events. Translate player commands for actions like firing bullets and handle pause/exit/restart requests. Use SoundManager for action sounds.
+          - Manage player input and system events. Translate player commands, such as firing bullets with sound using `SHOOT_SOUND`, and handle pause/exit/restart requests.
 
         - apply_screen_shake() -> None:
           - Implement a brief shake effect on screen during collision to enhance impact feedback for the player.

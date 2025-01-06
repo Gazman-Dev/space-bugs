@@ -1,7 +1,7 @@
 import pygame
 import random
 import time
-from pygame.math import Vector2 
+from pygame.math import Vector2
 
 from configs.config import MAX_ENEMIES, SCREEN_WIDTH, SCREEN_HEIGHT, FPS
 from game.bullet import Bullet
@@ -53,6 +53,10 @@ class Game:
             self.clock.tick(FPS)
             self.spawn_enemies()
             self.toolbar.update(self.score, self.player_health)
+
+    def check_collisions(self) -> None:
+        self.check_bullet_collisions()
+        self.check_player_collisions()
 
     def check_bullet_collisions(self) -> None:
         bullets_to_remove = []

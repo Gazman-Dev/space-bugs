@@ -1,18 +1,30 @@
-import pygame
-import configs/config.py
-
-- Purpose: Defines the Toolbar component to display real-time player score and health status.
-- Class: Toolbar
-  - Attributes:
-    - screen: Pygame display surface.
-    - font: Pygame font for rendering text.
-    - score_position: Position on screen to render score.
-    - health_position: Position on screen to render health.
-  - Methods:
-    - __init__(screen, font):
-      - Initializes Toolbar with screen and font.
-      - Sets default positions for score and health display.
-    - update(score, health):
-      - Updates the display values for score and health.
-    - draw():
-      - Renders text for score and health on the screen.
+- Purpose: Defines the Toolbar component to display real-time player score and health status and integrates sound effects using the SoundManager for consistent sound management.
+- Imports:
+  - import pygame
+  - import configs/config.py
+  - import path/to/sound_manager (for accessing SoundManager class)
+- Definitions:
+  - Class: Toolbar
+    - Attributes:
+      - screen: Pygame display surface passed from initialization, used for rendering.
+      - font: Pygame font object for text rendering.
+      - score_position: A tuple indicating the position on the screen for displaying the score.
+      - health_position: A tuple indicating the position on the screen for displaying health.
+      - sound_manager: An instance of the SoundManager class for managing sounds.
+      
+    - Methods:
+      - __init__(screen, font):
+        - Accepts a Pygame display surface and font as parameters.
+        - Initializes score and health default positions.
+        - Creates an instance of the SoundManager for handling sound effects.
+        
+      - update(score: int, health: int):
+        - Accepts the current score and health as parameters.
+        - Adjusts the display values for score and health on the toolbar.
+      
+      - draw():
+        - Renders the score and health text to the defined positions on the screen with the current font.
+        - Utilizes the SoundManager to play specific sound effects based on events.
+        - For movement actions, use the MOVE_SOUND constant from SoundManager.
+        - For shooting actions, use the SHOOT_SOUND constant from SoundManager.
+        - Background music or specific sound effects can leverage BGM_SOUND or EXPLOSION_SOUND constants accordingly.

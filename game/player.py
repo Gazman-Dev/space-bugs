@@ -22,7 +22,7 @@ class Player:
         if 0 <= new_position.x <= config.SCREEN_WIDTH - self.size.x and 0 <= new_position.y <= config.SCREEN_HEIGHT - self.size.y:
             self.position = new_position
             self.update_rect()
-        self.play_sound("move")
+        self.play_sound(SoundManager.MOVE_SOUND)
 
     def draw(self, surface: pygame.Surface) -> None:
         scaled_image = pygame.transform.scale(self.player_image, (int(self.size.x), int(self.size.y)))

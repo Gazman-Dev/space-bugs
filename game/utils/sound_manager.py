@@ -2,6 +2,11 @@ import pygame
 import os
 
 class SoundManager:
+    MOVE_SOUND: str = "sounds/move.wav"
+    SHOOT_SOUND: str = "sounds/shoot.wav"
+    BGM_SOUND: str = "sounds/bgm.mp3"
+    EXPLOSION_SOUND: str = "sounds/explosion.wav"
+
     def __init__(self, sound_files: dict[str, str]):
         self.sound_files = sound_files
         self.loaded_sounds = {}
@@ -30,4 +35,3 @@ class SoundManager:
 # manager = SoundManager(sound_files)
 # manager.load_sounds()
 # manager.play_sound("laser")
-```

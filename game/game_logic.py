@@ -10,7 +10,7 @@ from game.player import Player
 from game.toolbar import Toolbar
 from sounds.sound_effects import SoundEffects
 from music.background_music import BackgroundMusic
-
+from sounds.sound_manager import SoundManager
 
 class Game:
     def __init__(self) -> None:
@@ -28,6 +28,7 @@ class Game:
         self.shake_intensity: int = 0
         self.sound_effects: SoundEffects = SoundEffects()
         self.background_music: BackgroundMusic = BackgroundMusic()
+        self.sound_manager: SoundManager = SoundManager()
 
     def setup(self) -> None:
         self.player = Player()
@@ -35,7 +36,7 @@ class Game:
         self.player_health = 5
         self.score = 0
         self.shake_intensity = 0
-        self.sound_effects.load_sounds()
+        self.sound_manager.load_sounds()
         self.background_music.play()
 
     def spawn_enemies(self) -> None:
@@ -65,7 +66,7 @@ class Game:
                     enemies_to_remove.append(enemy)
                     bullets_to_remove.append(bullet)
                     self.score += 1
-                    self.sound_effects.play_collision_sound()
+                    self.sound_manager.play_collision_sound()
 
         for bullet in bullets_to_remove:
             if bullet in self.bullets:
@@ -83,7 +84,7 @@ class Game:
                 enemies_to_remove.append(enemy)
                 self.player_health -= 1
                 self.apply_screen_shake()
-                self.sound_effects.play_collision_sound()
+                self.sound_manager.play_collision_sound()
                 if self.player_health <= 0:
                     self.running = False
                     self.display_game_over_popup()
@@ -121,7 +122,7 @@ class Game:
                 if event.key == pygame.K_SPACE and self.player:
                     bullet = Bullet(Vector2(self.player.rect.centerx, self.player.rect.top))
                     self.bullets.append(bullet)
-                    self.sound_effects.play_shooting_sound()
+                    self.sound_manager.play_shooting_sound()
                 elif event.key == pygame.K_r:
                     self.__init__()
                     self.setup()

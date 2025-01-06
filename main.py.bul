@@ -7,7 +7,9 @@
   - main() -> None:
     - Initialize the pygame library to prepare for game operations.
     - Create an instance of the `SoundManager` class to handle game sounds.
-    - Call the `load_sounds()` method of the `SoundManager` instance to preload all necessary sound effects for the game.
+    - Call the `load_sounds()` method of the `SoundManager` instance to preload all necessary sound effects for the game using the specified sound paths for consistency.
     - Create an instance of the `Game` class for managing game state and logic.
     - Invoke the `setup()` method of the `Game` instance to prepare initial game settings.
-    - Enter a loop to continuously execute the `game_loop()` method from the `Game` instance. Integrate sound playback where necessary, maintaining game flow until termination conditions are met.
+    - Enter a loop to continuously execute the `game_loop()` method from the `Game` instance.
+      - Within the game loop, intersperse calls to `play_sound` for various events such as movement, shooting, background music, and explosions using `SoundManager` constants like MOVE_SOUND, SHOOT_SOUND, BGM_SOUND, and EXPLOSION_SOUND, ensuring centralized and consistent sound management.
+    - Maintain game flow until termination conditions are met, ensuring all resources are cleanly managed.

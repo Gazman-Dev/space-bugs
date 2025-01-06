@@ -1,7 +1,7 @@
 import pygame
 
-from game import Game
-from sound.sound_manager import SoundManager
+from game.game import Game
+from game.utils.sound_manager import SoundManager
 
 def main() -> None:
     # Initialize pygame

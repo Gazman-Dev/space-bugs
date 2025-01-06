@@ -5,7 +5,7 @@ from pygame.math import Vector2
 
 from configs.config import ENEMY_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
 from game.utils.assets_loader import AssetsLoader
-from utils.sound_manager import SoundManager
+from game.utils.sound_manager import SoundManager
 
 
 class Enemy:

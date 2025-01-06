@@ -10,10 +10,11 @@ from game.enemy import Enemy
 from game.player import Player
 from game.toolbar import Toolbar
 from game.utils.sound_manager import SoundManager
+from game.popup import GameOverPopup
 
 
 class Game:
-    def __init__(self, sound_manager) -> None:
+    def __init__(self, sound_manager: SoundManager) -> None:
         pygame.init()
         self.screen: pygame.Surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock: pygame.time.Clock = pygame.time.Clock()
@@ -27,6 +28,7 @@ class Game:
         self.score: int = 0
         self.shake_intensity: int = 0
         self.sound_manager: SoundManager = sound_manager
+        self.game_over_popup: GameOverPopup = GameOverPopup()
 
     def setup(self) -> None:
         self.player = Player(self.sound_manager)
@@ -52,6 +54,8 @@ class Game:
             self.clock.tick(FPS)
             self.spawn_enemies()
             self.toolbar.update(self.score, self.player_health)
+            if not self.running and self.player_health <= 0:
+                self.display_game_over_popup()
 
     def check_collisions(self) -> None:
         self.check_bullet_collisions()
@@ -85,7 +89,7 @@ class Game:
                 enemies_to_remove.append(enemy)
                 self.player_health -= 1
                 self.apply_screen_shake()
-                self.sound_manager.play_sound(SoundManager.GAME_OVER)
+                self.sound_manager.play_sound(SoundManager.EXPLOSION_SOUND)
                 if self.player_health <= 0:
                     self.running = False
                     self.display_game_over_popup()
@@ -126,7 +130,7 @@ class Game:
                     self.bullets.append(bullet)
                     self.sound_manager.play_sound(SoundManager.SHOOT_SOUND)
                 elif event.key == pygame.K_r:
-                    self.__init__()
+                    self.__init__(self.sound_manager)
                     self.setup()
 
     def apply_screen_shake(self) -> None:
@@ -134,3 +138,4 @@ class Game:
 
     def display_game_over_popup(self) -> None:
         print("Game Over!")
+        # Logic to display game over popup

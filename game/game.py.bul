@@ -1,4 +1,4 @@
-- Purpose: Implements the main game loop while managing player health and score. Handles collision detection, events, score updates, and integrates SoundManager for responsive gameplay interactions. Includes player collision animations and a game over popup.
+- Purpose: Implements the main game loop, manages player health, and score, handles collisions and events, updates the score, and integrates the SoundManager for responsive gameplay interactions. Includes player collision animations and a game over popup.
 
 - Imports:
   - import pygame
@@ -11,8 +11,14 @@
   - import time
   - from game.toolbar import Toolbar
   - from sounds.sound_manager import SoundManager
+  - from game.popup import GameOverPopup
 
 - Definitions:
+  - Attributes: 
+    - BGM_SOUND: str - Background music sound constant.
+    - EXPLOSION_SOUND: str - Explosion sound effect constant.
+    - SHOOT_SOUND: str - Shooting sound effect constant.
+
   - Classes:
     - Game:
       - Attributes:
@@ -28,34 +34,35 @@
         - score: int - Records the player's accumulated score.
         - shake_intensity: int - Level of screen shake intensity applied during player collision.
         - sound_manager: SoundManager - Instance for managing and playing sound effects.
+        - game_over_popup: GameOverPopup - Component for displaying game over popup.
 
       - Methods:
         - setup() -> None:
-          - Initialize core game components, including the player, screen settings, enemies, bullets, and toolbar. Reset health and score to initial values. Configure initial shake intensity. Start background music with `BGM_SOUND`.
+          - Initialize core game components, such as the player, screen, enemies, bullets, toolbar, and game over popup. Reset health and score. Set initial shake intensity. Start background music using `BGM_SOUND`.
 
         - spawn_enemies() -> None:
-          - Spawn new enemies depending on elapsed time and current enemy count. Update enemy list with newly spawned enemies based on timing.
+          - Spawn new enemies based on elapsed time and current enemy count. Add new enemies to the enemy list as per timing rules.
 
         - game_loop() -> None:
-          - Continuously run the game loop while `running` is true. Handle inputs, update all game objects, detect collisions, refresh display, manage enemy spawning, and update score and health. Trigger sound effects using sound constants from SoundManager as needed (e.g., `EXPLOSION_SOUND` for enemy destruction).
+          - Maintain the game loop while `running` is true. Handle inputs, update game objects, detect collisions, refresh display, manage enemies, update score, and player health. Use SoundManager to trigger sounds. Display game over popup when health is zero, handling keypress for exit or reset.
 
         - check_bullet_collisions() -> None:
-          - Check active bullets for enemy collisions. On a hit, remove the bullet and enemy, increment score, and play an explosion sound using `EXPLOSION_SOUND`.
+          - Detect bullet collisions with enemies. On collision, remove bullet and enemy, update score, and play `EXPLOSION_SOUND`.
 
         - check_player_collisions() -> None:
-          - Verify if any enemy collides with the player. On collision, apply screen shake, remove enemy, decrease health, play collision sound using `EXPLOSION_SOUND`, and handle game end if health depletes.
+          - Detect enemy collisions with the player. On collision, apply screen shake, remove the enemy, decrease health, play collision sound using `EXPLOSION_SOUND`, and handle game end if health reaches zero.
 
         - update() -> None:
-          - Update player, enemies, and bullets positions with boundary checks. Reflect health and score changes in the toolbar. Ensure sound effects are played through SoundManager for actions occurring on-screen.
+          - Adjust player, enemies, and bullets positions with boundary checks. Update toolbar with new health and score. Use SoundManager for appropriate sound effects based on actions on-screen.
 
         - draw() -> None:
-          - Clear the display and redraw all game entities, including player, enemies, and bullets. Use toolbar to show updated health and score.
+          - Clear and redraw all game entities, such as the player, enemies, and bullets. Use the toolbar to show updated health and score. Render game over popup when necessary.
 
         - handle_events() -> None:
-          - Manage player input and system events. Translate player commands, such as firing bullets with sound using `SHOOT_SOUND`, and handle pause/exit/restart requests.
+          - Process player input and system events. Translate commands for player actions, like shooting bullets with `SHOOT_SOUND`. Manage pause, exit, and restart commands.
 
         - apply_screen_shake() -> None:
-          - Implement a brief shake effect on screen during collision to enhance impact feedback for the player.
+          - Apply a screen shake effect briefly during player collision to enhance feedback and immersion.
 
         - display_game_over_popup() -> None:
-          - Render a popup to signify game over, provide restart or exit options, and ensure appropriate handling of background music and game state. Use SoundManager for related sounds.
+          - Render and control a game over popup to signal the end of the game, allowing restart or exit options. Ensure proper handling of sounds and game state transitions using SoundManager.

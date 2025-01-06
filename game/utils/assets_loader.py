@@ -1,5 +1,5 @@
 import pygame
-from sound_manager import SoundManager
+from game.utils.sound_manager import SoundManager
 
 class AssetsLoader:
     PLAYER_IMAGE_PATH: str = "images/player.png"

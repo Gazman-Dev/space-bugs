@@ -2,7 +2,7 @@
 - Imports:
   - import pygame
   - from path.to.vector2_module import Vector2
-  - from sound_manager import SoundManager
+  - from game.utils.sound_manager import SoundManager
 - Definitions:
   - Classes:
     - Bullet: 

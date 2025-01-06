@@ -3,7 +3,7 @@ from pygame.math import Vector2
 
 import configs.config as config
 from game.utils.assets_loader import AssetsLoader
-from sound_manager import SoundManager
+from game.utils.sound_manager import SoundManager
 
 
 class Player:

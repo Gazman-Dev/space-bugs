@@ -1,7 +1,7 @@
 - Purpose: Centralizes and manages loading of image assets for player and enemy objects.
 - Imports:
   - import pygame
-  - from sound_manager import SoundManager
+  - from game.utils.sound_manager import SoundManager
 - Definitions:
   - Attributes:
     - PLAYER_IMAGE_PATH: File path for player image asset.

@@ -1,6 +1,6 @@
 import pygame
 from pygame.math import Vector2
-from sound_manager import SoundManager
+from game.utils.sound_manager import SoundManager
 
 
 class Bullet:

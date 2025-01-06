@@ -1,6 +1,8 @@
 import pygame
+
 from game.game_logic import Game
-from sound.sound_manager import SoundManager
+from game.utils.sound_manager import SoundManager
+
 
 def main() -> None:
     # Initialize pygame
@@ -22,6 +24,7 @@ def main() -> None:
     while running:
         # Execute game_loop() from Game instance
         running = game_instance.game_loop()
+
 
 if __name__ == "__main__":
     main()

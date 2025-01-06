@@ -5,6 +5,7 @@
   - from pygame.math import Vector2
   - from configs.config import ENEMY_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
   - from utils.assets_loader import load_enemy_asset
+  - from utils.sound_manager import SoundManager
   - import random
 
 - Definitions:   
@@ -19,16 +20,17 @@
         - rect: pygame.Rect - Defines the rectangular area representing the enemy's current location on the screen for positioning and collision detection.
         - path: List[Vector2] - Sequence of coordinates representing the enemy's closed movement path.
         - current_target_index: int - Index of the current target coordinate from the path to achieve incremental movement.
+        - sound_manager: SoundManager - Instance responsible for managing and playing sound effects related to the enemy.
       - Methods:
-        - __init__(position: Vector2) -> None:
-          - Initialize an enemy at a given position, set speed from configuration, generate a closed random path within boundaries with each point distanced appropriately, and set the first path point as the initial target. Load and scale enemy image, and set up rect for collision management.
+        - __init__(position: Vector2, sound_manager: SoundManager) -> None:
+          - Initialize an enemy at a given position, set speed from configuration, generate a closed random path within boundaries with each point distanced appropriately, and set the first path point as the initial target. Load and scale enemy image, set up rect for collision management, and assign the sound manager.
         - move() -> None:
-          - Calculate the vector between the current position and the target path coordinate. Normalize this vector to get the movement direction if not already zero. Calculate the travel vector by scaling the direction with the enemy's speed. If the travel vector is shorter than needed to reach the target, increment the position by it. Otherwise, compute any excess using remaining travel distance beyond target, update position, and move to next path segment, eventually looping back if reaching the end.
+          - Calculate the vector between the current position and the target path coordinate. Normalize this vector to get the movement direction if not already zero. Calculate the travel vector by scaling the direction with the enemy's speed. If the travel vector is shorter than needed to reach the target, increment the position by it and play movement sound effect. Otherwise, compute any excess using remaining travel distance beyond target, update position, move to next path segment, potentially playing a path change sound, and eventually looping back if reaching the end.
         - draw(screen: pygame.Surface) -> None:
           - Draw the enemy on the screen using its image at the current position for visual representation.
         - check_collision(obj: pygame.Rect) -> bool:
-          - Determine collision with another object by checking overlap of rects.
+          - Determine collision with another object by checking overlap of rects. If collision detected, play collision sound effect.
         - update(screen: pygame.Surface) -> None:
           - Refresh enemy state with movement execution, path cycling, updating rect positions.
         - generate_random_path() -> None:
-          - Construct a closed path of up to 8 random Vector2 coordinates, ensuring each is within screen limits and a predefined minimum distance from others, to create a seamless movement cycle.
+          - Construct a closed path of up to 8 random Vector2 coordinates ensuring each is within screen limits and a predefined minimum distance from others to create a seamless movement cycle.

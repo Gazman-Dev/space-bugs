@@ -1,16 +1,26 @@
 - Purpose: Centralizes and manages loading of image assets for player and enemy objects.
 - Imports:
   - import pygame
+  - from sound_manager import SoundManager
 - Definitions:
   - Attributes:
     - PLAYER_IMAGE_PATH: File path for player image asset.
     - ENEMY_IMAGE_PATH: File path for enemy image asset.
-  - Methods:
-    - load_image(image_path: str) -> pygame.Surface:
-      - Loads an image file and returns it as a pygame Surface object.
-    - load_player_image() -> pygame.Surface:
-      - Uses load_image to load the player image using PLAYER_IMAGE_PATH.
-    - load_enemy_image() -> pygame.Surface:
-      - Uses load_image to load the enemy image using ENEMY_IMAGE_PATH.
-
-Ensure other game components such as player and enemies reference the updated `assets_loader.py` for loading their associated images. Adjust the imports in those files accordingly.
+  - Classes:
+    - AssetsLoader:
+      - Attributes:
+        - player_image: Stores the loaded pygame Surface for the player.
+        - enemy_image: Stores the loaded pygame Surface for the enemy.
+      - Methods:
+        - load_image(image_path: str) -> pygame.Surface:
+          - Load and return an image as a pygame Surface using the given file path.
+        - load_player_image() -> pygame.Surface:
+          - Utilize load_image to obtain and store the player's image using PLAYER_IMAGE_PATH.
+        - load_enemy_image() -> pygame.Surface:
+          - Utilize load_image to obtain and store the enemy's image using ENEMY_IMAGE_PATH.
+    - SoundAssetsLoader:
+      - Attributes:
+        - sound_manager: An instance of SoundManager to handle sound loading.
+      - Methods:
+        - initialize_sounds(sound_files: dict):
+          - Populate the sound_manager's sound_files and load sounds using the SoundManager.

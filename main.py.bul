@@ -1,10 +1,13 @@
-- Purpose: Acts as the entry point to initialize and start the Space Bugs game with proper setup and loop execution.
+- Purpose: Acts as the entry point to initialize and start the Space Bugs game with proper setup, including sound management and loop execution.
 - Imports:
   - import pygame
   - from game.game_logic import Game
+  - from sound.sound_manager import SoundManager
 - Methods:
   - main() -> None:
     - Initialize the pygame library to prepare for game operations.
+    - Create an instance of the `SoundManager` class to handle game sounds.
+    - Call the `load_sounds()` method of the `SoundManager` instance to preload all necessary sound effects for the game.
     - Create an instance of the `Game` class for managing game state and logic.
-    - Invoke the `setup` function of the `Game` instance to prepare initial game settings.
-    - Enter a loop to continuously execute the `game_loop()` method from the `Game` instance, maintaining game flow until termination conditions are met.
+    - Invoke the `setup()` method of the `Game` instance to prepare initial game settings.
+    - Enter a loop to continuously execute the `game_loop()` method from the `Game` instance. Integrate sound playback where necessary, maintaining game flow until termination conditions are met.

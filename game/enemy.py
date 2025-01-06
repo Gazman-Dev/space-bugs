@@ -3,9 +3,10 @@ import pygame
 from pygame.math import Vector2
 from configs.config import ENEMY_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
 from game.utils.assets_loader import AssetsLoader
+from utils.sound_manager import SoundManager
 
 class Enemy:
-    def __init__(self, position: Vector2) -> None:
+    def __init__(self, position: Vector2, sound_manager: SoundManager) -> None:
         self.position: Vector2 = position
         self.speed: float = ENEMY_SPEED
         self.direction: Vector2 = Vector2(0, 1)  # Assuming the enemy moves downwards initially
@@ -15,6 +16,7 @@ class Enemy:
         self.rect: pygame.Rect = pygame.Rect(self.position.x, self.position.y, self.size.x, self.size.y)
         self.path: list[Vector2] = self.generate_random_path()
         self.current_target_index: int = 0
+        self.sound_manager: SoundManager = sound_manager
 
     def generate_random_path(self) -> list[Vector2]:
         path = []
@@ -39,8 +41,10 @@ class Enemy:
             if vector_to_target.length() < travel_vector.length():
                 self.position = target
                 self.current_target_index = (self.current_target_index + 1) % len(self.path)
+                self.sound_manager.play_path_change_sound()
             else:
                 self.position += travel_vector
+                self.sound_manager.play_movement_sound()
 
         self.rect.topleft = (self.position.x, self.position.y)
 
@@ -48,7 +52,10 @@ class Enemy:
         surface.blit(self.image, self.position)
 
     def check_collision(self, obj: pygame.Rect) -> bool:
-        return self.rect.colliderect(obj)
+        collision = self.rect.colliderect(obj)
+        if collision:
+            self.sound_manager.play_collision_sound()
+        return collision
 
     def update(self) -> None:
         self.move()

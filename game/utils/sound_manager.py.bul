@@ -1,0 +1,22 @@
+import pygame
+import os (for handling file paths if needed)
+
+- Purpose: Manage sound effects for the game.
+- Definitions:
+  - Attributes:
+    - sound_files: A dictionary holding sound file names and their paths.
+    - loaded_sounds: A dictionary to store pygame sound objects loaded from sound_files.
+- Class: SoundManager
+  - Attributes:
+    - sound_files: A mapping of sound names to file paths.
+    - loaded_sounds: A dictionary holding loaded sound objects.
+  - Methods:
+    - load_sounds():
+      - Iterate over sound_files dictionary.
+      - For each sound file, use pygame.mixer.Sound to load the sound.
+      - Store each loaded sound in loaded_sounds dictionary.
+    - play_sound(sound_name, loop=False):
+      - Check if the provided sound_name is in loaded_sounds.
+      - If present, get the sound object from loaded_sounds.
+      - If loop is True, play the sound indefinitely.
+      - If loop is False, play the sound once.
